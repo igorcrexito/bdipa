@@ -7,9 +7,9 @@ package Banco.Conexao;
 
 import DAO.Paciente;
 import DAO.Usuario;
-import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
