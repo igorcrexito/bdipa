@@ -54,8 +54,9 @@ public class Main {
         ////////////////////////////////////////////////////////
         // TESTE PARA INSERIR PACIENTE NO BANCO DE DADOS
         //userDao.inserirUsuario("5", "Usuario Qualquer", "UNEB", "qualquer@gmail.com", 0);
-        
-    
+
+        //userDao.alteraNomeByRg("Paulo", "111");
+        pacDao.alteraIdadeById(25, "1");
         
 
         ///////////////////////////////////////////////////////////////////////

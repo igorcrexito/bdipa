@@ -55,4 +55,12 @@ public class PacienteDAO {
         conexao.executeSql(SQL_String);
     }
 
+
+      public void alteraIdadeById (int idadeNova, String id) {
+
+        String SQL_String = "UPDATE pacientes SET idade = '" + idadeNova + "'WHERE id = '" + id + "'";
+        conexao.executeSql(SQL_String);
+
+    }
+
 }
