@@ -81,4 +81,11 @@ public class UsuarioDAO {
         conexao.executeSql(SQL_String);          
     }
 
+      public void alteraNomeByRg (String novoNome, String rg) {
+
+        String SQL_String = "UPDATE usuario SET nome = '" + novoNome + "'WHERE rg = '" + rg + "'";
+        conexao.executeSql(SQL_String);
+
+    }
+
 }
