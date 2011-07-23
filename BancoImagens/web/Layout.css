@@ -1,0 +1,343 @@
+/*
+    Document   : Layout
+    Created on : 20/07/11
+    Author     : PA
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root {
+    display: block;
+}
+
+body {
+        
+        background-color: bisque;
+        margin: auto;
+        width: 980px;
+        /*border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        
+	/*background: rgb(249,244,240) repeat-x left top;*/
+}
+
+#subcorpo2{
+    background-color: blanchedalmond;
+        margin: auto;
+        width: 980px;
+        /*border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;*/
+        /*background: url(imagens/usada.JPG) repeat center;*/
+}
+
+#subcorpo {
+    /*Localização apenas do quadro principal na tela*/
+    /*width: 960px;*/
+   /* position: relative;*/
+    background:#0099ff;
+    filter:opacity(alpha=50); /* para o IE */
+    -moz-opacity:0.5; /* para o FireFox */
+    opacity:0.5; /* para o outros Navegadores */
+    padding-bottom: 100px;
+    margin-left: 30%;
+    margin-right: 10px;
+    margin-top: 30px;
+
+   /* background: rgb(255,255,255) repeat-x left top;*/
+     /*border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;*/
+}
+
+#campos {
+    /*Localização dos campos dentro do quadrado principal*/
+    margin: auto;
+    width: 120px;
+    height: 120px;
+    margin-right:2%;
+    margin-top: 30px;
+      /*border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;*/
+}
+
+#campoAssinatura{
+    /*Pequena assinatura localizada na parte de baixo da página.*/
+    background:#0099ff;
+    filter:opacity(alpha=50); /* para o IE */
+    -moz-opacity:0.5; /* para o FireFox */
+    opacity:0.5; /* para o outros Navegadores */
+    width: 600px;
+    margin:auto;
+    margin-top: 400px;
+      /*border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;*/
+}
+
+#textoAssinatura {
+    text-align:center;
+    font-size: 15px;
+}
+
+#cabecalho{
+     
+    background: url(imagens/frontal.png) no-repeat center;
+    
+    margin-left: 10px;
+    margin-top: 7px;
+    width: 960px;
+    height: 200px;
+     /*border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;*/
+}
+
+#menu {
+    /*background:#0099ff;
+    filter:opacity(alpha=50); /* para o IE */
+    /*-moz-opacity:0.5; /* para o FireFox */
+    /*opacity:0.5; /* para o outros Navegadores */
+    position:absolute;
+    margin-left: 10px;
+    margin-top: 30px;
+    width: 250px;
+    height: 400px;
+     /*border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;*/
+}
+
+#menu ul
+{
+    list-style-type: none;
+}
+
+#menu ul a
+{
+    text-decoration: none;
+}
+
+#titulo {
+    text-align:center;
+    font-size: 40px;
+    color: blue;
+    font-weight: bold;
+}
+
+#textoNormal {
+    font-size: 14px;
+    font-weight: normal;
+}
+#textoNormalBranco {
+   
+    font-size: 14px;
+    font-weight: normal;
+    color: white;
+}
+
+
+
+.clearit {
+	margin: 0;
+	padding: 0;
+	height: 0;
+	clear: both;
+}
+
+/* BUBBLE PLASTIC HORIZONTAL MENU */
+
+.bubplastic.horizontal {
+	width: 100%;
+	height: 27px;
+	margin: 0;
+	padding: 0;
+	background: #000000 url(images/bg-bubplastic.gif) top left repeat-x;
+}
+.bubplastic.horizontal ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.bubplastic.horizontal ul li {
+	float: left;
+	margin: 0;
+	padding: 0;
+	background: transparent url(images/bg-bubplastic-button.gif) top left no-repeat;
+}
+
+.bubplastic.horizontal ul li a {
+	display: block;
+	height: 27px;
+	padding-left: 35px;
+	float: left;
+	text-transform: uppercase;
+	font-family: "Helvetica Neue",helvetica,"microsoft sans serif",arial,sans-serif;
+	font-size: 70%;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.bubplastic.horizontal ul li a span.menu_ar {
+	display: block;
+	float: left;
+	height: 22px;
+	padding-top: 5px;
+	padding-right: 35px;
+	background: transparent url(images/bg-bubplastic-button.gif) top right no-repeat;
+	cursor: pointer;
+}
+/* END BUBBLE PLASTIC HORIZONTAL MENU */
+
+
+
+/* BUBBLE PLASTIC VERTICAL MENU */
+
+.bubplastic.vertical {
+	width: 125px;
+	margin: 0px;
+	padding: 0px;
+	display: block;
+}
+.bubplastic.vertical ul {
+	display: block;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.bubplastic.vertical ul li {
+	display: block;
+	float: left;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background: transparent url(images/bg-bubplastic-button.gif) top left no-repeat;
+}
+
+.bubplastic.vertical ul li a {
+	display: block;
+	margin: 0;
+	width: 100%;
+	padding-left: 35px;
+	text-transform: uppercase;
+	font-family: "Helvetica Neue",helvetica,"microsoft sans serif",arial,sans-serif;
+	font-size: 70%;
+	color: #FFFFFF;
+	text-decoration: none;
+	background: transparent url(images/bg-bubplastic-button.gif) top left no-repeat;
+}
+
+.bubplastic.vertical ul li a span.menu_ar {
+	display: block;
+	margin: 0;
+	width: 100%;
+	height: 22px;
+	padding-top: 5px;
+	padding-right: 35px;
+	background: transparent url(images/bg-bubplastic-button.gif) top right no-repeat;
+	cursor: pointer;
+}
+/* END BUBBLE PLASTIC VERTICAL MENU */
+
+
+
+/* AQUA HOVER */
+.bubplastic.aqua ul li a:hover,
+.bubplastic.aqua ul li.highlight a {
+	background: transparent url(images/bg-bubplastic-h-aqua.gif) top left no-repeat;
+}
+.bubplastic.aqua ul li a:hover span.menu_ar,
+.bubplastic.aqua ul li.highlight a span.menu_ar {
+	background: transparent url(images/bg-bubplastic-h-aqua.gif) top right no-repeat;
+}
+
+
+/* BLUE HOVER */
+.bubplastic.blue ul li a:hover,
+.bubplastic.blue ul li.highlight a {
+	background: transparent url(images/bg-bubplastic-h-blue.gif) top left no-repeat;
+}
+.bubplastic.blue ul li a:hover span.menu_ar,
+.bubplastic.blue ul li.highlight a span.menu_ar {
+	background: transparent url(images/bg-bubplastic-h-blue.gif) top right no-repeat;
+}
+
+
+/* GRAY HOVER */
+.bubplastic.gray ul li a:hover,
+.bubplastic.gray ul li.highlight a {
+	background: transparent url(images/bg-bubplastic-h-gray.gif) top left no-repeat;
+}
+.bubplastic.gray ul li a:hover span.menu_ar,
+.bubplastic.gray ul li.highlight a span.menu_ar {
+	background: transparent url(images/bg-bubplastic-h-gray.gif) top right no-repeat;
+}
+
+
+/* LIME HOVER */
+.bubplastic.lime ul li a:hover,
+.bubplastic.lime ul li.highlight a {
+	background: transparent url(images/bg-bubplastic-h-lime.gif) top left no-repeat;
+}
+.bubplastic.lime ul li a:hover span.menu_ar,
+.bubplastic.lime ul li.highlight a span.menu_ar {
+	background: transparent url(images/bg-bubplastic-h-lime.gif) top right no-repeat;
+}
+
+
+/* ORANGE HOVER */
+.bubplastic.orange ul li a:hover,
+.bubplastic.orange ul li.highlight a {
+	background: transparent url(images/bg-bubplastic-h-orange.gif) top left no-repeat;
+}
+.bubplastic.orange ul li a:hover span.menu_ar,
+.bubplastic.orange ul li.highlight a span.menu_ar {
+	background: transparent url(images/bg-bubplastic-h-orange.gif) top right no-repeat;
+}
+
+
+/* PINK HOVER */
+.bubplastic.pink ul li a:hover,
+.bubplastic.pink ul li.highlight a {
+	background: transparent url(images/bg-bubplastic-h-pink.gif) top left no-repeat;
+}
+.bubplastic.pink ul li a:hover span.menu_ar,
+.bubplastic.pink ul li.highlight a span.menu_ar {
+	background: transparent url(images/bg-bubplastic-h-pink.gif) top right no-repeat;
+}
+
+
+/* PURPLE HOVER */
+.bubplastic.purple ul li a:hover,
+.bubplastic.purple ul li.highlight a {
+	background: transparent url(images/bg-bubplastic-h-purple.gif) top left no-repeat;
+}
+.bubplastic.purple ul li a:hover span.menu_ar,
+.bubplastic.purple ul li.highlight a span.menu_ar {
+	background: transparent url(images/bg-bubplastic-h-purple.gif) top right no-repeat;
+}
+
+
+/* RED HOVER */
+.bubplastic.red ul li a:hover,
+.bubplastic.red ul li.highlight a {
+	background: transparent url(images/bg-bubplastic-h-red.gif) top left no-repeat;
+}
+.bubplastic.red ul li a:hover span.menu_ar,
+.bubplastic.red ul li.highlight a span.menu_ar {
+	background: transparent url(images/bg-bubplastic-h-red.gif) top right no-repeat;
+}
