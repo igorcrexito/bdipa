@@ -27,6 +27,8 @@ public class UsuarioDAO {
     public UsuarioDAO(ConexaoBD conexao) {
        this.conexao = conexao;
     }
+    public UsuarioDAO() {
+    }
 
 
     public Usuario getUsuarioRG (String rg) throws SQLException {
@@ -86,6 +88,26 @@ public class UsuarioDAO {
         String SQL_String = "UPDATE usuario SET nome = '" + novoNome + "'WHERE rg = '" + rg + "'";
         conexao.executeSql(SQL_String);
 
+    }
+      
+          public Usuario getUsuariosFromLoginSenha (String rg, String senha) throws SQLException {
+
+        String SQL_string = "SELECT * FROM usuario WHERE " +
+                "RG LIKE'%" + rg + "%'" + "AND SENHA LIKE '%"+senha+"%'";
+
+        ResultSet rs= conexao.executeSql(SQL_string);
+        rs.first();
+
+        String nome = rs.getString("nome");
+        int nivel = rs.getInt("nivelAcesso");
+        String instituicao = rs.getString("instituicao");
+        String email = rs.getString("email");
+        
+        if (nome!=null || !nome.equals("")) {
+            return new Usuario(rg,instituicao,nome,email,nivel);
+        } else {
+            return null;
+        }
     }
 
 }
