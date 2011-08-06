@@ -52,6 +52,7 @@ body {
 
 #footer {
     position: relative;
+    clear:both;
     margin-top: 660px;
     height: 70px;
     width: 100%;
@@ -72,7 +73,6 @@ body {
     margin-left:0px;
     width:100%;
     background-color: white;
-    float: left;
     position:relative;
 }
 
@@ -126,15 +126,15 @@ body {
     padding-top: 50px;
     margin-left: 0%;
     width:49%;
+    float:left;
     padding-bottom: 30px;
 }
 
 
 #colunaB {
-    margin-top: -615px; /* tá uma gambiarra ainda*/
     padding-top: 50px;
     padding-bottom: 30px;
-    margin-left: 50%;
+    float:right;
     width:49%;
 }
 
