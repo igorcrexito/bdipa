@@ -103,8 +103,8 @@ public class ConexaoBD{
 
         try {
              statement = conexao.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-             statement.executeUpdate(sql);
-              //resultSet=rs;
+             rs = statement.executeQuery(sql);
+
         } catch (SQLException ex) {
             Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
         }
