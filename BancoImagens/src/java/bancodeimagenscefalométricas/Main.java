@@ -6,6 +6,7 @@
 package bancodeimagenscefalométricas;
 
 import Banco.Conexao.ConexaoBD;
+import Banco.Conexao.ConteudoDAO;
 import Banco.Conexao.PacienteDAO;
 import Banco.Conexao.UsuarioDAO;
 import DAO.Paciente;
@@ -20,21 +21,29 @@ import java.util.ArrayList;
  */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
+
+    static UsuarioDAO userDao = new UsuarioDAO(ConexaoBD.getConexaoBD());
+    static PacienteDAO pacDao = new PacienteDAO(ConexaoBD.getConexaoBD());
+    static ConteudoDAO conteudoDao = new ConteudoDAO(ConexaoBD.getConexaoBD());
+
+
+
 //CLASSE DE TESTE ==> TESTAR MÉTODOS DE UTILIZAÇÃO DO BANCO
     public static void main(String[] args) throws SQLException {
 
         //CONECTANDO AO BANCO DE DADOS
-        UsuarioDAO userDao = new UsuarioDAO(ConexaoBD.getConexaoBD());
-        PacienteDAO pacDao = new PacienteDAO(ConexaoBD.getConexaoBD());
+        //UsuarioDAO userDao = new UsuarioDAO(ConexaoBD.getConexaoBD());
+        //PacienteDAO pacDao = new PacienteDAO(ConexaoBD.getConexaoBD());
+        //ConteudoDAO conteudoDao = new ConteudoDAO(ConexaoBD.getConexaoBD());
+
+
+        conteudoDao.inserirConteudo("texto01", "Imagens Cefalometricas", "Hoje fizemos mais uma tarefa: Que ótimo!", "home.xhtml");
 
 
         ////////////////////////////////////////////////////////
         // TESTE PARA RESGATAR USUARIO COM BASE NO RG
         /*Usuario usuario;
-        usuario = userDao.getUsuarioRG("5");
+        usuario = userDao.getUsuarioRG("12");
         System.out.println("RG: "+ usuario.getRg());
         System.out.println("nome: "+ usuario.getNome());
         System.out.println("instituição: "+ usuario.getInstituicao());
@@ -53,11 +62,11 @@ public class Main {
 
         ////////////////////////////////////////////////////////
         // TESTE PARA INSERIR PACIENTE NO BANCO DE DADOS
-        //userDao.inserirUsuario("5", "Usuario Qualquer", "UNEB", "qualquer@gmail.com", 0);
+
 
         //userDao.alteraNomeByRg("Paulo", "111");
-        pacDao.alteraIdadeById(25, "1");
-        
+       // pacDao.alteraIdadeById(25, "1");
+
 
         ///////////////////////////////////////////////////////////////////////
         // TESTE PARA RESGATAR PACIENTE NO BANCO COM BASE NO ID
@@ -71,7 +80,11 @@ public class Main {
 
 
 
-        //userDao.excluirUsuario("5");
-        
+        //userDao.excluirUsuario("c");
+
     }
+   // public void iserirUsuario(){
+     //   userDao.inserirUsuario("53", "Usuario Qualquerf", "UNEBf", "qualquer@gmail.comf", 0);
+    //    }
+
 }
