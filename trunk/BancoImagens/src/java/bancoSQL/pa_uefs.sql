@@ -12,11 +12,29 @@
 
 # Host: localhost    Database: pa_uefs
 # ------------------------------------------------------
-# Server version 5.5.10
+# Server version 5.5.15
 
-DROP DATABASE IF EXISTS `pa_uefs`;
-CREATE DATABASE `pa_uefs` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `pa_uefs`;
+#
+# Source for table conteudo
+#
+
+DROP TABLE IF EXISTS `conteudo`;
+CREATE TABLE `conteudo` (
+  `referencia` varchar(50) NOT NULL DEFAULT '',
+  `tituloTexto` varchar(100) DEFAULT NULL,
+  `texto` varchar(3000) DEFAULT NULL,
+  `paginaLocalizado` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`referencia`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+#
+# Dumping data for table conteudo
+#
+
+LOCK TABLES `conteudo` WRITE;
+/*!40000 ALTER TABLE `conteudo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `conteudo` ENABLE KEYS */;
+UNLOCK TABLES;
 
 #
 # Source for table pacientes
@@ -37,7 +55,7 @@ CREATE TABLE `pacientes` (
 
 LOCK TABLES `pacientes` WRITE;
 /*!40000 ALTER TABLE `pacientes` DISABLE KEYS */;
-INSERT INTO `pacientes` VALUES (1,1,1,'C:/imagem.png');
+INSERT INTO `pacientes` VALUES (1,1,25,'C:/imagem.png');
 /*!40000 ALTER TABLE `pacientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,7 +70,9 @@ CREATE TABLE `usuario` (
   `instituicao` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `nivelAcesso` int(1) NOT NULL DEFAULT '0',
-  `senha` varchar(20) DEFAULT '',
+  `senha` varchar(20) DEFAULT NULL,
+  `login` varchar(25) DEFAULT NULL,
+  `justificativa` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`RG`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -62,43 +82,17 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('01010101','Zeh','UEFS','ze@gmail.com',0,'senha1');
-INSERT INTO `usuario` VALUES ('111','Renato Russo','Legião Urbana','rrusso@legiao.com.br',0,'papapop');
-INSERT INTO `usuario` VALUES ('12132','Marcelo Bonfá','Legião Urbana','mbonfa@legiao.com.br',0,'uiui');
-INSERT INTO `usuario` VALUES ('123','Zeh','UFBA','zehzeh@gmail.com',1,'ventando');
+INSERT INTO `usuario` VALUES ('','','','',0,NULL,NULL,NULL);
+INSERT INTO `usuario` VALUES ('123','Cleriston Sampaio','Uefs','cleriston@com',0,NULL,NULL,NULL);
+INSERT INTO `usuario` VALUES ('1234','igor','231321','321321',0,NULL,NULL,NULL);
+INSERT INTO `usuario` VALUES ('2131312','Cleriston de Oliveira Sampaio','321321','321321321',0,NULL,NULL,NULL);
+INSERT INTO `usuario` VALUES ('213141213','cleriston','uefs','cleirston@uefs',0,NULL,NULL,NULL);
+INSERT INTO `usuario` VALUES ('22','22','22','22',0,NULL,NULL,NULL);
+INSERT INTO `usuario` VALUES ('234243','22','222','22',0,NULL,NULL,NULL);
+INSERT INTO `usuario` VALUES ('53','Usuario Qualquerf','UNEBf','qualquer@gmail.comf',0,NULL,NULL,NULL);
+INSERT INTO `usuario` VALUES ('dadad','cleuahsu','dadad','adad',0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
-
-#
-# Source for table usuariospacientes
-#
-
-DROP TABLE IF EXISTS `usuariospacientes`;
-CREATE TABLE `usuariospacientes` (
-  `Id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `RG` varchar(10) NOT NULL DEFAULT '',
-  PRIMARY KEY (`Id`,`RG`),
-  KEY `RG` (`RG`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
-#
-# Dumping data for table usuariospacientes
-#
-
-LOCK TABLES `usuariospacientes` WRITE;
-/*!40000 ALTER TABLE `usuariospacientes` DISABLE KEYS */;
-INSERT INTO `usuariospacientes` VALUES (1,'01010101');
-/*!40000 ALTER TABLE `usuariospacientes` ENABLE KEYS */;
-UNLOCK TABLES;
-
-#
-#  Foreign keys for table usuariospacientes
-#
-
-ALTER TABLE `usuariospacientes`
-ADD CONSTRAINT `id` FOREIGN KEY (`Id`) REFERENCES `pacientes` (`Id`),
-ADD CONSTRAINT `RG` FOREIGN KEY (`RG`) REFERENCES `usuario` (`RG`);
-
 
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
