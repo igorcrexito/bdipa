@@ -20,7 +20,6 @@ public class UsuarioDAO {
 
     private Usuario usuario;
     private ConexaoBD conexao;
-    private Statement teste;
     ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
 
@@ -80,7 +79,7 @@ public class UsuarioDAO {
     public void excluirUsuario(String rg) throws SQLException{
 
         String SQL_String = "delete from usuario where rg='" + rg + "'";
-        conexao.executeSql(SQL_String);          
+        conexao.executeSql(SQL_String);
     }
 
       public void alteraNomeByRg (String novoNome, String rg) {
@@ -89,7 +88,7 @@ public class UsuarioDAO {
         conexao.executeSql(SQL_String);
 
     }
-      
+
           public Usuario getUsuariosFromLoginSenha (String rg, String senha) throws SQLException {
 
         String SQL_string = "SELECT * FROM usuario WHERE " +
@@ -102,7 +101,7 @@ public class UsuarioDAO {
         int nivel = rs.getInt("nivelAcesso");
         String instituicao = rs.getString("instituicao");
         String email = rs.getString("email");
-        
+
         if (nome!=null || !nome.equals("")) {
             return new Usuario(rg,instituicao,nome,email,nivel);
         } else {

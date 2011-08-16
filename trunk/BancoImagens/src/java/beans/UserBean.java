@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package beans;
 
+import Banco.Conexao.ConexaoBD;
 import Banco.Conexao.PacienteDAO;
 import Banco.Conexao.UsuarioDAO;
 import DAO.Usuario;
@@ -20,14 +20,60 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-
 public class UserBean {
 
-    private String nome;
-    private String password;
-    private String rg;
-    private String erro="";
-    private String instituicao;
+    private String nome = "";
+    private String password = "";
+    private String rg = "";
+    private String erro = "";
+    private String instituicao = "";
+    private String login = "";
+    private String email = "";
+    private String informacao = "";
+    private String fins = "";
+    private int nivelAcesso = 0;
+
+    UsuarioDAO userDao = new UsuarioDAO(ConexaoBD.getConexaoBD());
+
+    public String getFins() {
+        return fins;
+    }
+
+    public void setFins(String fins) {
+        this.fins = fins;
+    }
+
+    public String getInformacao() {
+        return informacao;
+    }
+
+    public void setInformacao(String informacao) {
+        this.informacao = informacao;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getNivelAcesso() {
+        return nivelAcesso;
+    }
+
+    public void setNivelAcesso(int nivelAcesso) {
+        this.nivelAcesso = nivelAcesso;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
     public String getNome() {
         return nome;
@@ -61,22 +107,68 @@ public class UserBean {
         this.password = password;
     }
 
-    public void mostraDados() {
-        UsuarioDAO userDAO = new UsuarioDAO();
-        
+    public void cadastro() {
+        // teste = " " + email + "-" + instituicao + "-" + nome + "-" + rg + "-" + logar + "-" + password + "-" + nivelAcesso;
         try {
-            Usuario user = userDAO.getUsuariosFromLoginSenha(this.rg,this.password);
-            this.nome = user.getNome(); 
-            this.rg = user.getRg();
-            this.instituicao = user.getInstituicao();
-            System.out.println("RG do sacana é: "+ this.rg);
-        } catch (SQLException ex) {
-            erro = "Senha e/ou login errado(s)";
-            Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
+            userDao.inserirUsuario(rg, nome, instituicao, email, nivelAcesso);
+            informacao = "Usuário " + nome + " cadastrado com sucesso";
+            this.email = "";
+            this.instituicao = "";
+            this.login = "";
+            this.nome = "";
+            this.rg = "";
+            this.fins = "";
+
+
+        } catch (Exception ex) {
+            informacao = "Usuário não pode ser cadastrado";
         }
-       
     }
 
+    public void mostraDados() {
+
+        //UsuarioDAO userDAO = new UsuarioDAO();
+        try {
+            Usuario user = userDao.getUsuarioRG(this.rg);
+            this.nome = user.getNome();
+            this.rg = user.getRg();
+            this.instituicao = user.getInstituicao();
+            informacao = "RG do sacana é: " + this.rg;
+        } catch (SQLException ex) {
+            informacao = "Senha e/ou login errado(s)";
+            Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void logar()  {
+
+
+        try {
+        Usuario user = userDao.getUsuarioRG(rg);
+
+            informacao=user.getNome()+" Seja Bem Vindo";
+
+        } catch (Exception ex) {
+            informacao="Senha ou login inválido";
+            //Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+     this.password="";
+     this.rg="";
+
+    }
+
+    public void excluir(){
+        try {
+            userDao.excluirUsuario(rg);
+            informacao="Usuario deletado";
+        } catch (SQLException ex) {
+            informacao="Senha ou login inválido";
+        }
+
+    }
     public String getErro() {
         return erro;
     }
@@ -84,6 +176,4 @@ public class UserBean {
     public void setErro(String erro) {
         this.erro = erro;
     }
-   
-   
 }
