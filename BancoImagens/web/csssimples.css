@@ -1,4 +1,4 @@
-/* 
+/*
     Document   : csssimples
     Created on : 02/07/2011, 12:11:18
     Author     : Nalminha
@@ -6,12 +6,12 @@
         Purpose of the stylesheet follows.
 */
 
-/* 
+/*
    TODO customize this sample style
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
 
-root { 
+root {
     display: block;
 }
 
@@ -41,6 +41,14 @@ body {
 #textoGrande {
     font-size: 20px;
     font-weight: bold;
+}
+#textoGrandeCentro {
+    margin: auto;
+    margin-top: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+
 }
 
 #imagem {

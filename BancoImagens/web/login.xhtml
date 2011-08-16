@@ -18,7 +18,9 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div id="header"></div>
+       <div id="header">
+
+        </div>
 
         <div id="subcorpo2">
             <div id="barradivisora"></div>
@@ -29,7 +31,7 @@ and open the template in the editor.
                     <div class="titulo_menu"  ><a href="" class="link_menu" title="Teóricos">Principais Teóricos</a></div>
                     <div class="titulo_menu"  ><a href="bancoImagens.xhtml" class="link_menu" title="Banco">Banco de Imagens</a></div>
                     <div class="titulo_menu"  ><a href="" class="link_menu" title="Applet">Ferramenta Applet</a></div>
-                    <div class="titulo_menu"  ><a href="login.xhtml" class="link_menu" title="Login">Acesso Login</a></div>
+                    <div class="titulo_menu"  ><a href="cadastro.xhtml" class="link_menu" title="Cadastro">Cadastre-se</a></div>
                 </ul>
             </div>
 
@@ -43,7 +45,7 @@ and open the template in the editor.
                         <h:outputText value="senha"></h:outputText><br></br>
                         <h:inputText  value="#{userBean.password}"></h:inputText><br></br><br></br>
 
-                        <h:commandButton value="Login" title="login" action="#{userBean.logar}"></h:commandButton><br></br><br></br>
+                        <h:commandButton value="Login"  action="#{userBean.logar}"></h:commandButton><br></br><br></br>
 
                         <h:outputText value="#{userBean.informacao}"></h:outputText><br></br><br></br>
 

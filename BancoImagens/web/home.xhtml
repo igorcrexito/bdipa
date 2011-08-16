@@ -2,76 +2,64 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <div id="header">
-        </div><div></div>
+
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <title>BANCO DE IMAGENS CEFALOMÉTRICAS</title>
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <link href="Layout.css" rel="stylesheet" type="text/css" media="screen" />
 
-        
+
     </h:head>
     <h:body>
-        <div id="subcorpo2">
-            <div id="barradivisora"></div>
-            <div id="menuhorizontal">
-                <ul id="menu">
-                        <div class="titulo_menu"  ><a href="" class="link_menu" title="Home">Home</a></div>
-                        <div class="titulo_menu"  ><a href="" class="link_menu" title="Análises">Principais Análises</a></div>
-                        <div class="titulo_menu"  ><a href="" class="link_menu" title="Teóricos">Principais Teóricos</a></div>
-                        <div class="titulo_menu"  ><a href="" class="link_menu" title="Banco">Banco de Imagens</a></div>
-                        <div class="titulo_menu"  ><a href="" class="link_menu" title="Applet">Ferramenta Applet</a></div>
-                        <div class="titulo_menu"  ><a href="" class="link_menu" title="Login">Acesso Login</a></div>
-                </ul>
-            </div>
-            <div id="colunas">
-            <div id="colunaA">
-                <div id="tituloInterno">
-                    <h:outputText value="Banco de Imagens Cefalométricas"></h:outputText>
-                </div>
-                <div id="barraTitulo"></div>
-
-                <div id="textoInterno"><h:outputText value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
-                <h:outputText value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
-                <h:outputText value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
-                <h:outputText value="Lorem ipsum dolor sit amet,  adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
-                <h:outputText value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
-                <h:outputText value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
-                <h:outputText value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
-                <h:outputText value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
+        <f:view>
+            <h:form>
+                <div id="header">
+                    <ui:include src="campologin.xhtml"></ui:include>
                 </div>
 
-                <br></br><br></br><br></br><br></br>
-                <div id="tituloInterno">
-                    <h:outputText value="Principais Teóricos"></h:outputText>
-                </div>
-                <div id="barraTitulo"></div>
+                <div id="subcorpo2">
+                    <div id="barradivisora"></div>
+                    <ui:include src="menuhorizontal.xhtml"></ui:include>
 
-                <div id="textoInterno"><h:outputText value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
-                <h:outputText value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
-                <h:outputText value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
-                </div>
-            </div>
+                    <div id="subcorpo">
+                        <div id="colunaA">
+                            <div id="tituloInterno">
+                                <h:outputText value="#{pagesBean.tituloTextoCampo1}"></h:outputText>
+                            </div>
+                            <div id="barraTitulo"></div><h:outputText value="#{pagesBean.campo1}"></h:outputText><div id="textoInterno">
+                            </div>
 
-            <div id="colunaB">
-               <div id="tituloInterno">
-                    <h:outputText value="Principais Análises"></h:outputText>
-                </div>
-                <div id="barraTitulo"></div>
+                            <br></br><br></br><br></br><br></br>
+                            <div id="tituloInterno">
+                                <h:outputText value="Principais Teóricos"></h:outputText>
+                            </div>
+                            <div id="barraTitulo"></div>
 
-                <div id="textoInterno"><h:outputText value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
-                    <h:outputText value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
-                    <h:outputText value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "></h:outputText>
-                </div>
+                            <div id="textoInterno">
+                            </div>
+                        </div>
 
-                <div id="gifanimada"></div>
-            </div>
-            </div><div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
-        </div>
-        
+                        <div id="colunaB">
+                            <div id="tituloInterno">
+                                <h:outputText value="Principais Análises"></h:outputText>
+                            </div>
+                            <div id="barraTitulo"></div>
+
+                            <div id="textoInterno">
+                                <h:outputText value="#{homeBean.campo1}"></h:outputText>
+                            </div>
+
+                            <div id="gifanimada"></div>
+                        </div>
+                    </div> <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
+                </div>
+            </h:form>
+        </f:view>
     </h:body>
 </html>
 
