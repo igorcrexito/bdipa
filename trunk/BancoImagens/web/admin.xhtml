@@ -28,30 +28,39 @@ and open the template in the editor.
                     <div id="barradivisora"></div>
                     <ui:include src="menuhorizontal.xhtml"></ui:include>
                         <div id="campos">
-                            
-                                <h3>Página do Administrador</h3>
-                                <div id="barraTitulo"></div><br></br>
+                            <h3>PÁGINA DO ADMINISTRADOR</h3><br></br>
                                 <div id="campos">
                                     <h:form>
                                     <h4>Selecione a página a qual deseja alterar:</h4>
+                                    <div id="barraTitulo"></div><br></br>
                                     <h:selectOneRadio value="#{conteudoBean.paginaLocalizado}">
                                                     <f:selectItem itemValue="home.xhtml" itemLabel="Home" />
                                                     <f:selectItem itemValue="principaisanalises.xhtml" itemLabel="Principais Análises" />
                                                     <f:selectItem itemValue="principaisteoricos.xhtml" itemLabel="Principais Teóricos" />
                                                     <f:selectItem itemValue="bancodedados.xhtml" itemLabel="Banco de Dados" />
                                      </h:selectOneRadio>
-                                    <h:outputText value="Titulo do texto"></h:outputText><br></br>
-                                    <h:inputText style="width: 510px;" value="#{conteudoBean.titulo}"></h:inputText>
+                                    <h4>Título do Texto</h4>
+                                    <div id="barraTitulo"></div><br></br>
+                                    <h:inputText style="width: 100px;" value="#{conteudoBean.titulo}"></h:inputText>
                                     <br></br><br></br>
-                                    <h:outputText value="Referencia do texto"></h:outputText><br></br>
-                                    <h:inputText style="width: 510px;" value="#{conteudoBean.referencia}"></h:inputText>
+                                     <h4>Referência</h4>
+                                     <div id="barraTitulo"></div><br></br>
+                                     <h:selectOneRadio value="#{conteudoBean.referencia}">
+                                                    <f:selectItem itemValue="1" itemLabel="Primeiro Texto" />
+                                                    <f:selectItem itemValue="2" itemLabel="Segundo Texto" />
+                                                    <f:selectItem itemValue="3" itemLabel="Terceiro Texto" />
+                                                    <f:selectItem itemValue="4" itemLabel="Quarto Texto" />
+                                     </h:selectOneRadio>
                                     <br></br><br></br>
+                                    <h4>Editor de conteúdo:</h4>
+                                    <div id="barraTitulo"></div><br></br>
                                     <div id="areaTexto">
                                         <p:editor value="#{conteudoBean.texto}" widgetVar="editor" width="600"/>
-  
-                                        <h:panelGrid columns="2" style="margin-top:10px">
-                                          <h:commandButton value="Carrega" action="#{conteudoBean.carregaTexto}"></h:commandButton>
-                                          <h:commandButton value="Salva" action="#{conteudoBean.enviarTexto}"></h:commandButton>
+                                        <h:panelGrid columns="2" style="margin-left:30%">
+                                            <h:commandButton label="Carrega" image="imagens/load.png" value="Carrega" action="#{conteudoBean.carregaTexto}"></h:commandButton>
+                                            
+                                            <h:commandButton label="Salva" image="imagens/ok.png" value="Salva" action="#{conteudoBean.enviarTexto}"></h:commandButton>
+                                            
                                         </h:panelGrid>
                                      </div>
                                     <br></br><br></br><br></br><br></br>
