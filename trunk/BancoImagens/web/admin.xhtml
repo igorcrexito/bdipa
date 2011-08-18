@@ -18,6 +18,7 @@ and open the template in the editor.
 
 
     </h:head>
+     <f:view>
             <h:body>
                 <div id="header">
                     <ui:include src="campologin.xhtml"></ui:include>
@@ -27,10 +28,11 @@ and open the template in the editor.
                     <div id="barradivisora"></div>
                     <ui:include src="menuhorizontal.xhtml"></ui:include>
                         <div id="campos">
-                            <h:form>
+                            
                                 <h3>Página do Administrador</h3>
                                 <div id="barraTitulo"></div><br></br>
                                 <div id="campos">
+                                    <h:form>
                                     <h4>Selecione a página a qual deseja alterar:</h4>
                                     <h:selectOneRadio value="#{conteudoBean.paginaLocalizado}">
                                                     <f:selectItem itemValue="home.xhtml" itemLabel="Home" />
@@ -53,11 +55,13 @@ and open the template in the editor.
                                         </h:panelGrid>
                                      </div>
                                     <br></br><br></br><br></br><br></br>
+                                    </h:form>
                                 </div>
-                                </h:form>
+                                
                         </div>
                     <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
                 </div>
 
             </h:body>
+    </f:view>
 </html>

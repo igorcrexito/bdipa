@@ -12,14 +12,14 @@ import DAO.Usuario;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 /**
  *
  * @author 
  */
 @ManagedBean
-@SessionScoped
+@ApplicationScoped
 public class conteudoBean {
 
     String referencia;
@@ -62,10 +62,7 @@ public class conteudoBean {
 
     public void carregaTexto() {
         try {
-            conteudo.getConteudoRefencia(referencia);
-            System.out.println(referencia);
-             System.out.println(titulo);
-               System.out.println(paginaLocalizado);
+            this.texto = conteudo.getConteudoRefencia(referencia).getTexto();
         } catch (Exception ex) {
             Logger.getLogger(conteudoBean.class.getName()).log(Level.SEVERE, null, ex);
         }
