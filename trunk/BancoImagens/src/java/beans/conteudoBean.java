@@ -60,10 +60,24 @@ public class conteudoBean {
         this.titulo = titulo;
     }
 
+    public void carregaTexto() {
+        try {
+            conteudo.getConteudoRefencia(referencia);
+            System.out.println(referencia);
+             System.out.println(titulo);
+               System.out.println(paginaLocalizado);
+        } catch (Exception ex) {
+            Logger.getLogger(conteudoBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void enviarTexto() {
         try {
-            conteudo.inserirConteudo(referencia, titulo, texto, paginaLocalizado);
-
+            System.out.println(referencia);
+             System.out.println(titulo);
+              System.out.println(texto);
+               System.out.println(paginaLocalizado);
+           conteudo.inserirConteudo(referencia, titulo, texto, paginaLocalizado);
         }
         catch(Exception ex){
             
