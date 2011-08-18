@@ -45,7 +45,9 @@ public class ConteudoDAO {
         String paginaLocalizado = rs.getString("paginaLocalizado");
 
         conteudo = new Conteudo(referencia, tituloTexto, texto, paginaLocalizado);
-         return conteudo;
+        System.out.println(conteudo.getTexto());
+        return conteudo;
+
      }
 
 }

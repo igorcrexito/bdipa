@@ -7,10 +7,8 @@ package beans;
 
 import Banco.Conexao.ConexaoBD;
 import Banco.Conexao.ConteudoDAO;
-import DAO.Conteudo;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 
 /**
  *

@@ -18,6 +18,11 @@
     margin:auto;
     height:180px;
 }
+
+#areaTexto {
+    margin-left: 15%;
+}
+
 #campoLogin{
 
     float:right;
