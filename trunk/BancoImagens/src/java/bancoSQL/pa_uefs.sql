@@ -33,6 +33,9 @@ CREATE TABLE `conteudo` (
 
 LOCK TABLES `conteudo` WRITE;
 /*!40000 ALTER TABLE `conteudo` DISABLE KEYS */;
+INSERT INTO `conteudo` VALUES ('1','Titulo','ifaghifdagfiagfiagkdjagdjkagdjaghifgaidgaidg','gsdgsdgs');
+INSERT INTO `conteudo` VALUES ('sgsgsg','gfswgdsg','sgsgsg','sgsgdg');
+INSERT INTO `conteudo` VALUES ('texto01','Imagens Cefalometricas','Hoje fizemos mais uma tarefa: Que ótimo!','home.xhtml');
 /*!40000 ALTER TABLE `conteudo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,6 +94,7 @@ INSERT INTO `usuario` VALUES ('22','22','22','22',0,NULL,NULL,NULL);
 INSERT INTO `usuario` VALUES ('234243','22','222','22',0,NULL,NULL,NULL);
 INSERT INTO `usuario` VALUES ('53','Usuario Qualquerf','UNEBf','qualquer@gmail.comf',0,NULL,NULL,NULL);
 INSERT INTO `usuario` VALUES ('dadad','cleuahsu','dadad','adad',0,NULL,NULL,NULL);
+INSERT INTO `usuario` VALUES ('uh','uh','u','hu',0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
