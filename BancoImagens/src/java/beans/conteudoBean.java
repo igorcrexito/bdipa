@@ -70,10 +70,6 @@ public class conteudoBean {
 
     public void enviarTexto() {
         try {
-            System.out.println(referencia);
-             System.out.println(titulo);
-              System.out.println(texto);
-               System.out.println(paginaLocalizado);
            conteudo.inserirConteudo(referencia, titulo, texto, paginaLocalizado);
         }
         catch(Exception ex){
