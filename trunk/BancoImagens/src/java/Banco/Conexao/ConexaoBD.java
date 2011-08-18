@@ -34,7 +34,7 @@ public class ConexaoBD {
         this.DRIVER_JBDC = "com.mysql.jdbc.Driver";
         this.URL = "jdbc:mysql://localhost/pa_uefs";
         this.usuario = "root";
-        this.senha = "admin";
+        this.senha = "papapop12";
         conecta();
 
     }
