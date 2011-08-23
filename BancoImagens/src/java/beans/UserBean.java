@@ -23,16 +23,16 @@ import javax.faces.bean.SessionScoped;
 public class UserBean {
 
     private String nome = "";
-    private String password = "";
     private String rg = "";
     private String erro = "";
     private String instituicao = "";
-    private String login = "";
     private String email = "";
     private String informacao = "";
     private String fins = "";
     private int nivelAcesso = 0;
-
+    private String senha = "";
+    private String login = "";
+    private String justificativa = "";
     UsuarioDAO userDao = new UsuarioDAO(ConexaoBD.getConexaoBD());
 
     public String getFins() {
@@ -99,18 +99,26 @@ public class UserBean {
         this.rg = rg;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getJustificativa() {
+        return justificativa;
+    }
+
+    public void setJustificativa(String justificativa) {
+        this.justificativa = justificativa;
     }
 
     public void cadastro() {
         // teste = " " + email + "-" + instituicao + "-" + nome + "-" + rg + "-" + logar + "-" + password + "-" + nivelAcesso;
         try {
-            userDao.inserirUsuario(rg, nome, instituicao, email, nivelAcesso);
+            userDao.inserirUsuario(rg, nome, instituicao, email, nivelAcesso, senha, login, justificativa);
             informacao = "Usuário " + nome + " cadastrado com sucesso";
             this.email = "";
             this.instituicao = "";
@@ -141,34 +149,35 @@ public class UserBean {
 
     }
 
-    public void logar()  {
+    public void logar() {
 
 
         try {
-        Usuario user = userDao.getUsuarioRG(rg);
+            Usuario user = userDao.getUsuariosFromLoginSenha(login, senha);
 
-            informacao=user.getNome()+" Seja Bem Vindo";
+            informacao = user.getNome() + " Seja Bem Vindo";
 
         } catch (Exception ex) {
-            informacao="Senha ou login inválido";
+            informacao = "Senha ou login inválido";
             //Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
-     this.password="";
-     this.rg="";
+        this.senha = "";
+        this.rg = "";
 
     }
 
-    public void excluir(){
+    public void excluir() {
         try {
             userDao.excluirUsuario(rg);
-            informacao="Usuario deletado";
+            informacao = "Usuario deletado";
         } catch (SQLException ex) {
-            informacao="Senha ou login inválido";
+            informacao = "Senha ou login inválido";
         }
 
     }
+
     public String getErro() {
         return erro;
     }

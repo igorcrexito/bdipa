@@ -102,11 +102,11 @@ public class ConexaoBD {
             statement = conexao.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = statement.executeQuery(sql);
 
+
         } catch (SQLException ex) {
             Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rs;
-
     }
 
     /**Método para executar comandos SQL
@@ -122,7 +122,5 @@ public class ConexaoBD {
         } catch (SQLException ex) {
             Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }
 }
