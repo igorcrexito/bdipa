@@ -16,13 +16,19 @@ public class Usuario {
     private String nome;
     private String email;
     private int nivelAcesso;
+    private String senha;
+    private String login;
+    private String justificativa;
 
-    public Usuario(String rg, String instituicao, String nome, String email, int nivelAcesso) {
+    public Usuario(String rg, String instituicao, String nome, String email, int nivelAcesso, String senha, String login, String justificativa) {
         this.rg = rg;
         this.instituicao = instituicao;
         this.nome = nome;
         this.email = email;
         this.nivelAcesso = nivelAcesso;
+        this.senha = senha;
+        this.login = login;
+        this.justificativa = justificativa;
     }
 
     public Usuario () {
@@ -30,6 +36,33 @@ public class Usuario {
         this.instituicao = null;
         this.nome = null;
         this.email = null;
+        this.senha = null;
+        this.login = null;
+        this.justificativa = null;
+    }
+
+    public String getJustificativa() {
+        return justificativa;
+    }
+
+    public void setJustificativa(String justificativa) {
+        this.justificativa = justificativa;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getEmail() {
