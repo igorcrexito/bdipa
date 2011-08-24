@@ -17,7 +17,7 @@
     </h:head>
     <body>
         <f:view>
-            <f:event type="preRenderView" listener="#{pagBean.acionaHome}"/>
+            <f:event type="preRenderView" listener="#{pagBean.acionaPrincipaisTeoricos}"/>
             <h:form>
                 <div id="header">
                     <ui:include src="campologin.xhtml"></ui:include>
@@ -30,21 +30,20 @@
                     <div id="subcorpo">
                         <div id="colunaA">
                             <div id="tituloInterno">
-                                <h:outputText escape="false" value="Banco de Imagens Cefalométricas"></h:outputText>
+                                <h:outputText escape="false" value="Título 1"></h:outputText>
                             </div>
-                            <div id="barraTitulo"></div>
-                            <div id="textoInterno">
-                                   <h:outputText value="#{pagBean.campo1}" escape="false"></h:outputText>
+                             <div id="barraTitulo"></div>
+                            <div id ="textoInterno">
+                               <h:outputText value="#{pagBean.campo1}" escape="false"></h:outputText>
                             </div>
-                           
 
-                            <br></br>
+                            <br></br><br></br><br></br><br></br>
                             <div id="tituloInterno">
-                                <h:outputText escape="false" value="Principais Teóricos"></h:outputText>
+                                <h:outputText value="Principais Teóricos"></h:outputText>
                             </div>
                             <div id="barraTitulo"></div>
+
                             <div id="textoInterno">
-                                <h:outputText value="#{pagBean.campo2}" escape="false"></h:outputText>
                             </div>
                         </div>
 
@@ -54,7 +53,7 @@
                             </div>
                             <div id="barraTitulo"></div>
                             <div id="textoInterno">
-                                   <h:outputText value="#{pagBean.campo3}" escape="false"></h:outputText>
+                                <h:outputText value="#{pagBean.campo2}"></h:outputText>
                             </div>
 
                             <div id="gifanimada"></div>

@@ -34,7 +34,7 @@ public class ConexaoBD {
         this.DRIVER_JBDC = "com.mysql.jdbc.Driver";
         this.URL = "jdbc:mysql://localhost/pa_uefs";
         this.usuario = "root";
-        this.senha = "admin";
+        this.senha = "papapop12";
         conecta();
 
     }
@@ -118,7 +118,6 @@ public class ConexaoBD {
         try {
             statement = conexao.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             statement.execute(sql);
-            //statement.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
         }

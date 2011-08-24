@@ -5,7 +5,7 @@
 package bancodeimagenscefalométricas;
 
 import Banco.Conexao.ConexaoBD;
-import Banco.Conexao.ConteudoDAO;
+import Banco.Conexao.PaginaDAO;
 import Banco.Conexao.PacienteDAO;
 import Banco.Conexao.UsuarioDAO;
 import DAO.Paciente;
@@ -22,7 +22,7 @@ public class Main {
 
     static UsuarioDAO userDao = new UsuarioDAO(ConexaoBD.getConexaoBD());
     static PacienteDAO pacDao = new PacienteDAO(ConexaoBD.getConexaoBD());
-    static ConteudoDAO conteudoDao = new ConteudoDAO(ConexaoBD.getConexaoBD());
+    static PaginaDAO conteudoDao = new PaginaDAO();
 
     //CLASSE DE TESTE ==> TESTAR MÉTODOS DE UTILIZAÇÃO DO BANCO
     public static void main(String[] args) throws SQLException {

@@ -19,6 +19,13 @@
     height:180px;
 }
 
+#textosfig {
+    height: 230px;
+    width:180px;
+    margin-left: 150px;
+    background: url(imagens/textos.JPG) no-repeat;
+}
+
 #areaTexto {
     margin-left: 15%;
 }
@@ -174,10 +181,9 @@ body {
 }
 
 #textoInterno {
-
     position: relative;
     margin-top: 10px;
-    margin-left: 20px;
+    margin-left: 30px;
     font-size: 16px;
     font-weight: normal;
     color: black;

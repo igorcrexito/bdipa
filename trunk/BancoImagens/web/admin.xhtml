@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
 To change this template, choose Tools | Templates
 and open the template in the editor.
@@ -11,7 +11,7 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Área do administrador</title>
+<title>&#193;rea do administrador</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="default.css" rel="stylesheet" type="text/css" media="screen" />
@@ -28,40 +28,34 @@ and open the template in the editor.
                     <div id="barradivisora"></div>
                     <ui:include src="menuhorizontal.xhtml"></ui:include>
                         <div id="campos">
-                            <h3>PÁGINA DO ADMINISTRADOR</h3><br></br>
+                            <h3>P&#193;GINA DO ADMINISTRADOR</h3><br></br>
                                 <div id="campos">
                                     <h:form>
-                                    <h4>Selecione a página a qual deseja alterar:</h4>
+                                    <h4>Selecione a p&#225;gina a qual deseja alterar:</h4>
                                     <div id="barraTitulo"></div><br></br>
-                                    <h:selectOneRadio value="#{conteudoBean.paginaLocalizado}">
-                                                    <f:selectItem itemValue="home.xhtml" itemLabel="Home" />
-                                                    <f:selectItem itemValue="principaisanalises.xhtml" itemLabel="Principais Análises" />
-                                                    <f:selectItem itemValue="principaisteoricos.xhtml" itemLabel="Principais Teóricos" />
-                                                    <f:selectItem itemValue="bancodedados.xhtml" itemLabel="Banco de Dados" />
+                                    <h:selectOneRadio value="#{pagBean.nome}">
+                                                    <f:selectItem itemValue="home" itemLabel="Home" /> 
+                                                    <f:selectItem itemValue="principaisanalises" itemLabel="Principais An&#225;lises" />
+                                                    <f:selectItem itemValue="principaisteoricos" itemLabel="Principais Te&#243;ricos" />
+                                                    <f:selectItem itemValue="bancodeimagens" itemLabel="Banco de Imagens" />
                                      </h:selectOneRadio>
-                                    <h4>Título do Texto</h4>
-                                    <div id="barraTitulo"></div><br></br>
-                                    <h:inputText style="width: 100px;" value="#{conteudoBean.titulo}"></h:inputText>
                                     <br></br><br></br>
-                                     <h4>Referência</h4>
+                                     <h4>Refer&#234;ncia</h4>
                                      <div id="barraTitulo"></div><br></br>
-                                     <h:selectOneRadio value="#{conteudoBean.referencia}">
-                                                    <f:selectItem itemValue="1" itemLabel="Primeiro Texto" />
-                                                    <f:selectItem itemValue="2" itemLabel="Segundo Texto" />
-                                                    <f:selectItem itemValue="3" itemLabel="Terceiro Texto" />
-                                                    <f:selectItem itemValue="4" itemLabel="Quarto Texto" />
+                                     <h:selectOneRadio value="#{pagBean.referencia}">
+                                                    <f:selectItem itemValue="0" itemLabel="Primeiro Texto" />
+                                                    <f:selectItem itemValue="1" itemLabel="Segundo Texto" />
+                                                    <f:selectItem itemValue="2" itemLabel="Terceiro Texto" />
+                                                    <f:selectItem itemValue="3" itemLabel="Quarto Texto" />
+                                                    
                                      </h:selectOneRadio>
+                                     <br></br>
+                                     <div id="textosfig"></div>
                                     <br></br><br></br>
-                                    <h4>Editor de conteúdo:</h4>
+                                    <h4>Editor de conte&#250;do:</h4>
                                     <div id="barraTitulo"></div><br></br>
                                     <div id="areaTexto">
-
-                                        <h:panelGrid columns="2" style="margin-left:30%">
-                                            <h:commandButton label="Carrega" image="imagens/load.png" value="Carrega" action="#{conteudoBean.carregaTexto}"></h:commandButton>
-
-                                            <h:commandButton label="Salva" image="imagens/ok.png" value="Salva" action="#{conteudoBean.enviarTexto}"></h:commandButton>
-
-                                        </h:panelGrid>
+                                    <ui:include src="editor.xhtml"></ui:include>
                                      </div>
                                     <br></br><br></br><br></br><br></br>
                                     </h:form>
