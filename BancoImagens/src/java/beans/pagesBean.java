@@ -66,6 +66,19 @@ public class pagesBean {
          this.conteudos = pag.getConteudo();
     }
 
+     public void acionaPrincipaisAnalises() {
+        nome = "principaisanalises";
+        Pagina pag=null;
+        try {
+            pag = pagDAO.getPaginaFromNome(nome);
+        } catch (SQLException ex) {
+            Logger.getLogger(pagesBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+         nome = pag.getNome();
+         this.conteudos = pag.getConteudo();
+    }
+
      public void acionaPrincipaisTeoricos() {
         nome = "principaisteoricos";
         Pagina pag=null;

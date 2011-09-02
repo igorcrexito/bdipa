@@ -124,6 +124,15 @@ body {
     height: 260px;
 }
 
+#imgRicketts {
+    margin-top: 30px;
+    margin-left: 30%;
+    background:  url(imagens/rickettsgatao.png)  no-repeat;
+    width: 300px;
+    height: 350px;
+}
+
+
 #menuvertical {
     width:20%;
     margin-left: 0px;
