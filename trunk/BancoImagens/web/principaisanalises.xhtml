@@ -17,7 +17,7 @@
     </h:head>
     <body>
         <f:view>
-            <f:event type="preRenderView" listener="#{pagBean.acionaPrincipaisTeoricos}"/>
+            <f:event type="preRenderView" listener="#{pagBean.acionaPrincipaisAnalises}"/>
             <h:form>
                 <div id="header">
                     <ui:include src="campologin.xhtml"></ui:include>
@@ -30,16 +30,15 @@
                     <div id="subcorpo">
                         <div id="colunaA">
                             <div id="tituloInterno">
-                                <h:outputText escape="false" value="Steiner"></h:outputText>
+                                <h:outputText escape="false" value="Análise de Steiner"></h:outputText>
                             </div>
                              <div id="barraTitulo"></div>
                             <div id ="textoInterno">
                                <h:outputText value="#{pagBean.campo1}" escape="false"></h:outputText>
                             </div>
-
                             <br></br><br></br><br></br><br></br>
                             <div id="tituloInterno">
-                                <h:outputText value="Harvold"></h:outputText>
+                                <h:outputText value="Análise de Macnamara"></h:outputText>
                             </div>
                             <div id="barraTitulo"></div>
                             <div id ="textoInterno">
@@ -49,13 +48,12 @@
 
                         <div id="colunaB">
                             <div id="tituloInterno">
-                                <h:outputText value="Ricketts"></h:outputText>
+                                <h:outputText value="Análise de Ricketts"></h:outputText>
                             </div>
                             <div id="barraTitulo"></div>
                             <div id ="textoInterno">
                                <h:outputText value="#{pagBean.campo3}" escape="false"></h:outputText>
                             </div>
-                            <div id="imgRicketts"></div>
                         </div>
                     </div> <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
                 </div>
