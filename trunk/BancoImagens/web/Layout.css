@@ -229,8 +229,8 @@ body {
 #campoAssinatura{
     /*Pequena assinatura localizada na parte de baixo da página.*/
     background:#0099ff;
-    filter:opacity(alpha=50); /* para o IE */
-    -moz-opacity:0.5; /* para o FireFox */
+    /*filter:opacity(alpha=50); /* para o IE */
+    /*-moz-opacity:0.5; /* para o FireFox */
     opacity:0.5; /* para o outros Navegadores */
     width: 600px;
     margin:auto;
@@ -239,6 +239,10 @@ body {
       border-right: 1px solid black;
       border-bottom: 1px solid black;
       border-top: 1px solid black;*/
+}
+
+#applet {
+    margin-left:100px;
 }
 
 #textoAssinatura {
@@ -370,7 +374,7 @@ body {
 }
 
 #menu a:hover {
-    background: rgb(33,101,141) url("images/hover.gif") left center no-repeat;
+    background: rgb(33,101,141) left center no-repeat;
     color: #fff;
     padding-bottom: 8px;
 }
