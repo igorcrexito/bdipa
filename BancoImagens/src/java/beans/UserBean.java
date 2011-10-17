@@ -11,8 +11,11 @@ import DAO.Usuario;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 
 /**
  *
@@ -21,7 +24,7 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class UserBean {
-
+    Usuario user;
     private String nome = "";
     private String rg = "";
     private String erro = "";
@@ -137,7 +140,7 @@ public class UserBean {
 
         //UsuarioDAO userDAO = new UsuarioDAO();
         try {
-            Usuario user = userDao.getUsuarioRG(this.rg);
+            user = userDao.getUsuarioRG(this.rg);
             this.nome = user.getNome();
             this.rg = user.getRg();
             this.instituicao = user.getInstituicao();
@@ -149,23 +152,36 @@ public class UserBean {
 
     }
 
-    public void logar() {
+    public String logar() {
 
 
         try {
             Usuario user = userDao.getUsuariosFromLoginSenha(login, senha);
+            informacao="";
 
-            informacao = user.getNome() + " Seja Bem Vindo";
+            if (user!=null) {
+                /*resgatando dados do BD para o Bean*/
+                this.email = user.getEmail();
+                this.nivelAcesso = user.getNivelAcesso();
+                this.nome = user.getNome();
+                this.rg = user.getRg();
+                this.senha = user.getSenha();
+                this.instituicao = user.getInstituicao();
+                this.justificativa = user.getJustificativa();
+                this.login = user.getLogin();
 
+                if (user.getNivelAcesso()==1) {
+                    return "admin.xhtml";
+                 } else {
+                    return null;
+                 }
+            } else {
+                return null;
+            }
         } catch (Exception ex) {
             informacao = "Senha ou login inválido";
-            //Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-
-
-        this.senha = "";
-        this.rg = "";
-
     }
 
     public void excluir() {
@@ -178,6 +194,18 @@ public class UserBean {
 
     }
 
+     public void isAdmin(){
+
+	if (this.nivelAcesso!=1){
+                FacesContext fc = FacesContext.getCurrentInstance();
+		ConfigurableNavigationHandler nav
+		   = (ConfigurableNavigationHandler)
+			fc.getApplication().getNavigationHandler();
+
+		nav.performNavigation("erro");
+	}
+    }
+    
     public String getErro() {
         return erro;
     }

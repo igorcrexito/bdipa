@@ -18,9 +18,14 @@ and open the template in the editor.
 
 
     </h:head>
+    <body>
      <f:view>
+         <f:event type="preRenderView" listener="#{userBean.isAdmin}"/>
             <h:body>
                 <div id="header">
+                    <div id="msgLogin">
+                        <h:outputText value="#{userBean.nome}"></h:outputText>
+                    </div>
                     <ui:include src="campologin.xhtml"></ui:include>
                 </div>
 
@@ -67,4 +72,5 @@ and open the template in the editor.
 
             </h:body>
     </f:view>
+   </body>
 </html>
