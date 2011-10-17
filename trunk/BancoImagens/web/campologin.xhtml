@@ -14,11 +14,11 @@
                     <h:form>
                         <br></br>
                         <h:outputText value="Login: "></h:outputText>
-                        <h:inputText size="10" value="#{userBean.rg}"></h:inputText><br></br><br></br>
+                        <h:inputText size="10" value="#{userBean.login}"></h:inputText><br></br><br></br>
                         <h:outputText value="Senha: "></h:outputText>
                         <h:inputSecret size="10" value="#{userBean.senha}"></h:inputSecret><br></br><br></br>
                         <h:commandButton value="Logar" action="#{userBean.logar}"></h:commandButton><br></br>
-                        <h:outputText value="#{userBean.informacao}"></h:outputText><br></br>
+                        <h:outputText style="color: red" value="#{userBean.informacao}"></h:outputText><br></br>
                     </h:form>
                 </div>
            </h:form>

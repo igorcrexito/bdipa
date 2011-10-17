@@ -40,6 +40,17 @@
 
 }
 
+#msgLogin {
+    float: left;
+    width: 200px;
+    margin-top: 150px;
+    margin-left: 20px;
+    font-size: 14px;
+    font-weight: bolder;
+    font-variant: small-caps;
+    color: #003366;
+}
+
 
 body {
 
