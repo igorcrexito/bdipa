@@ -13,12 +13,13 @@
             <div id="campoLogin">
                     <h:form>
                         <br></br>
-                        <h:outputText value="Login: "></h:outputText>
-                        <h:inputText size="10" value="#{userBean.login}"></h:inputText><br></br><br></br>
-                        <h:outputText value="Senha: "></h:outputText>
-                        <h:inputSecret size="10" value="#{userBean.senha}"></h:inputSecret><br></br><br></br>
-                        <h:commandButton value="Logar" action="#{userBean.logar}"></h:commandButton><br></br>
+                        <h:outputText rendered="#{userBean.naoLogado}" value="Login: "></h:outputText>
+                        <h:inputText rendered="#{userBean.naoLogado}" size="10" value="#{userBean.login}"></h:inputText><br></br><br></br>
+                        <h:outputText rendered="#{userBean.naoLogado}" value="Senha: "></h:outputText>
+                        <h:inputSecret rendered="#{userBean.naoLogado}" size="10" value="#{userBean.senha}"></h:inputSecret><br></br><br></br>
+                        <h:commandButton rendered="#{userBean.naoLogado}" value="Logar" action="#{userBean.logar}"></h:commandButton><br></br>
                         <h:outputText style="color: red" value="#{userBean.informacao}"></h:outputText><br></br>
+                        <h:commandButton style="float:right" rendered="#{userBean.logado}" value="Logout" action="#{userBean.deslogar}"></h:commandButton>
                     </h:form>
                 </div>
            </h:form>

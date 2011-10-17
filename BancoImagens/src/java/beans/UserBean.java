@@ -36,10 +36,28 @@ public class UserBean {
     private String senha = "";
     private String login = "";
     private String justificativa = "";
+    private boolean naologado = true;
+    private boolean logado = false;
     UsuarioDAO userDao = new UsuarioDAO(ConexaoBD.getConexaoBD());
+
+    public boolean isLogado() {
+        return logado;
+    }
+
+    public void setLogado(boolean logado) {
+        this.logado = logado;
+    }
 
     public String getFins() {
         return fins;
+    }
+
+    public boolean isNaoLogado() {
+        return naologado;
+    }
+
+    public void setNaoLogado(boolean naologado) {
+        this.naologado = naologado;
     }
 
     public void setFins(String fins) {
@@ -136,6 +154,26 @@ public class UserBean {
         }
     }
 
+    public String deslogar() {
+
+        user = null;
+        nome = "";
+        rg = "";
+        erro = "";
+        instituicao = "";
+        email = "";
+        informacao = "";
+        fins = "";
+        nivelAcesso = 0;
+        senha = "";
+        login = "";
+        justificativa = "";
+        naologado = true;
+        logado = false;
+
+        return "home.xhtml";
+    }
+
     public void mostraDados() {
 
         //UsuarioDAO userDAO = new UsuarioDAO();
@@ -169,7 +207,8 @@ public class UserBean {
                 this.instituicao = user.getInstituicao();
                 this.justificativa = user.getJustificativa();
                 this.login = user.getLogin();
-
+                naologado = false;
+                logado = true;
                 if (user.getNivelAcesso()==1) {
                     return "admin.xhtml";
                  } else {

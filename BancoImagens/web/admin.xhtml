@@ -24,7 +24,7 @@ and open the template in the editor.
             <h:body>
                 <div id="header">
                     <div id="msgLogin">
-                        <h:outputText value="#{userBean.nome}"></h:outputText>
+                        <h:outputText rendered="#{userBean.logado}" value="Ol&#193;, #{userBean.nome}"></h:outputText>
                     </div>
                     <ui:include src="campologin.xhtml"></ui:include>
                 </div>
