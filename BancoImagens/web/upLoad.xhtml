@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Upload</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="default.css" rel="stylesheet" type="text/css" media="screen" />
+
+
+    </h:head>
+     <f:view>
+            <h:body>
+                <div id="header">
+                    <ui:include src="campologin.xhtml"></ui:include>
+                </div>
+
+                <div id="subcorpo2">
+                    <div id="barradivisora"></div>
+                    <ui:include src="menuhorizontal.xhtml"></ui:include>
+                    <div id="loginArea">
+                      
+        <p:outputPanel>
+            <h:form>
+                    <h:outputText value="Dados do paciente"/><br/><br/>
+
+                    <h:outputText value="Gênero:"/><br/>
+                    <h:selectOneRadio value="#{pacienteBean.sexo}">
+                                                    <f:selectItem itemValue="1" itemLabel="Maculino" />
+                                                    <f:selectItem itemValue="2" itemLabel="Feminino" />
+
+                                     </h:selectOneRadio><br/>
+
+                    <h:outputText value="Idade:"/>
+                    <h:inputText size="1" value="#{pacienteBean.idade}"></h:inputText><br/><br/>
+                    <h:outputText value="Tipo racial:"/>
+                    <h:selectOneRadio value="">
+                                                    <f:selectItem itemValue="1" itemLabel="Leucoderma" />
+                                                    <f:selectItem itemValue="2" itemLabel="Melanoderma" />
+                                                    <f:selectItem itemValue="3" itemLabel="Xantoderma" />
+                                                    <f:selectItem itemValue="4" itemLabel="Faioderma" />
+                                                    <f:selectItem itemValue="5" itemLabel="Desconhecido" />
+
+                                     </h:selectOneRadio><br/><br/>
+                    
+                    <p:graphicImage value="#{pacienteBean.imagem}" id="imagem" cache="false"/>
+                   
+                    
+                    <p:fileUpload auto="false" label="Selecionar..." mode="advanced" allowTypes="*.jpg;*.png;*.gif;" multiple="false" update="idarquivo,idimagem" fileUploadListener="#{uploadBean.fileUploadAction}" /> <br/>
+
+                    Arquivo selecionado: <h:outputText id="idarquivo" value="#{uploadBean.nomeArquivoSelecionado}"/>
+                                    
+               
+                </h:form>
+                  </p:outputPanel>
+   
+
+            </div>
+
+                    <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
+                </div>
+
+            </h:body>
+    </f:view>
+</html>
