@@ -19,10 +19,11 @@ import javax.faces.event.ComponentSystemEvent;
 
 /**
  *
- * @author Nalminha
+ * @author Igor
  */
 @ManagedBean
 @SessionScoped
+
 public class UserBean {
     Usuario user;
     private String nome = "";
