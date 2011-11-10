@@ -8,14 +8,18 @@ import Banco.Conexao.ConexaoBD;
 import Banco.Conexao.PacienteDAO;
 import Banco.Conexao.UsuarioDAO;
 import DAO.Usuario;
+import EmailUtils.EmailUtils;
+import EmailUtils.Mensagem;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.ConfigurableNavigationHandler;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
+import org.apache.commons.mail.EmailException;
 
 /**
  *
@@ -40,6 +44,8 @@ public class UserBean {
     private boolean naologado = true;
     private boolean logado = false;
     UsuarioDAO userDao = new UsuarioDAO(ConexaoBD.getConexaoBD());
+    private Mensagem mensagem = new Mensagem();
+
 
     public boolean isLogado() {
         return logado;
@@ -140,7 +146,20 @@ public class UserBean {
     public void cadastro() {
         // teste = " " + email + "-" + instituicao + "-" + nome + "-" + rg + "-" + logar + "-" + password + "-" + nivelAcesso;
         try {
+
+            String mensagemEmail = "Nome: "+ this.nome+ "\n\n"+ "Email: "+ this.email+ "\n\n"+ "RG: "+ this.rg;
+            mensagemEmail= mensagemEmail + "\n\n" + "Instituição: "+ this.instituicao+ "\n\n" + "Fins: "+ this.fins;
+            mensagem.setMensagem(mensagemEmail);
+            mensagem.setTitulo("Mensagem de Requisição para uso do Banco de Imagens");
+            EmailUtils.enviaEmail(mensagem);
+         } catch (EmailException ex) {
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro! Occoreu um erro ao enviar a mensagem.", "Erro"));
+             Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
+         }
+
+        try {
             userDao.inserirUsuario(rg, nome, instituicao, email, nivelAcesso, senha, login, justificativa);
+
             informacao = "Usuário " + nome + " cadastrado com sucesso";
             this.email = "";
             this.instituicao = "";
