@@ -122,4 +122,18 @@ public class ConexaoBD {
             Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    /**Método para executar comandos SQL
+     *
+     * @author Yoka Sistemas
+
+     */
+    public void executeUpdate(String sql) {
+        try {
+            statement = conexao.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            statement.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
