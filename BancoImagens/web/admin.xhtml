@@ -63,6 +63,43 @@ and open the template in the editor.
                                     <ui:include src="editor.xhtml"></ui:include>
                                      </div>
                                     <br></br><br></br><br></br><br></br>
+                                    <p:dataTable style="margin-left: -20px" var="usuario" value="#{novoUserBean.usuarios}">
+                                            <p:column>
+                                                <f:facet name="header">
+                                                        Nome
+                                                </f:facet>
+                                                <h:outputText value="#{usuario.nome}" />
+                                            </p:column>
+
+                                            <p:column>
+                                                <f:facet name="header">
+                                                        RG
+                                                </f:facet>
+                                                <h:outputText value="#{usuario.rg}" />
+                                            </p:column>
+
+                                            <p:column>
+                                                <f:facet name="header">
+                                                        Justificativa
+                                                </f:facet>
+                                                <h:outputText value="#{usuario.justificativa}" />
+                                            </p:column>
+                                        <p:column>
+                                                <f:facet name="header">
+                                                        N. Atual
+                                                </f:facet>
+                                            <h:outputText value="#{usuario.nivelAcesso}" />
+                                        </p:column>
+                                        <p:column>
+                                                <f:facet name="header">
+                                                        N. Novo
+                                                </f:facet>
+                                            <h:commandButton value="0" action="#{usuario.alterato0}"/>
+                                            <h:commandButton value="1" action="#{usuario.alterato1}"/>
+                                            <h:commandButton value="2" action="#{usuario.alterato2}"/>
+                                            </p:column>
+                                        </p:dataTable>
+                                        
                                     </h:form>
                                 </div>
 

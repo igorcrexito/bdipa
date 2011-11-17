@@ -5,6 +5,12 @@
 
 package DAO;
 
+import Banco.Conexao.ConexaoBD;
+import Banco.Conexao.UsuarioDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author odontoradiosis
@@ -105,6 +111,32 @@ public class Usuario {
         this.rg = rg;
     }
 
+    public void alterato1() {
+        UsuarioDAO user = new UsuarioDAO(ConexaoBD.getConexaoBD());
+        try {
+           user.alteraNivelAcessoByRGto1(this.rg);
+        } catch (Exception ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+    }
+    public void alterato2() {
+        UsuarioDAO user = new UsuarioDAO(ConexaoBD.getConexaoBD());
+        try {
+           user.alteraNivelAcessoByRGto2(this.rg);
+        } catch (Exception ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    public void alterato0() {
+        UsuarioDAO user = new UsuarioDAO(ConexaoBD.getConexaoBD());
+        try {
+           user.alteraNivelAcessoByRGto0(this.rg);
+        } catch (Exception ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
 }

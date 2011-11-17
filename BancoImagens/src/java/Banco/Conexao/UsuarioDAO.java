@@ -60,6 +60,24 @@ public class UsuarioDAO {
         return usuarios;
     }
 
+    public ArrayList<Usuario> getUsuarios() throws SQLException {
+        usuarios = new ArrayList<Usuario>();
+        String SQL_string = "SELECT * FROM usuario";
+        ResultSet rs = conexao.executeSql(SQL_string);
+        while (rs.next()) {
+            String nome = rs.getString("nome");
+            String rg = rs.getString("RG");
+            String instituicao = rs.getString("instituicao");
+            String email = rs.getString("email");
+            int nivelAcesso = rs.getInt("nivelAcesso");
+            String senha = rs.getString("senha");
+            String login = rs.getString("login");
+            String justificativa = rs.getString("justificativa");
+            usuarios.add(new Usuario(rg, instituicao, nome, email, nivelAcesso, senha, login, justificativa));
+        }
+        return usuarios;
+    }
+
     public void inserirUsuario(String rg, String nome, String instituicao, String email, int nivelAcesso, String senha, String login, String justificativa) {
 
         String SQL_String = "INSERT INTO usuario (RG, nome, instituicao, email, nivelAcesso, senha, login, justificativa)"
@@ -108,5 +126,20 @@ public class UsuarioDAO {
                 return null;
             }
 
+    }
+
+    public void alteraNivelAcessoByRGto0(String rg) {
+        String SQL_String = "UPDATE usuario SET nivelAcesso = '" + 0 + " 'WHERE rg = '" + rg + "'";
+        conexao.executeUpdate(SQL_String);
+    }
+
+    public void alteraNivelAcessoByRGto1(String rg) {
+        String SQL_String = "UPDATE usuario SET nivelAcesso = '" + 1 + " 'WHERE rg = '" + rg + "'";
+        conexao.executeUpdate(SQL_String);
+    }
+
+    public void alteraNivelAcessoByRGto2(String rg) {
+        String SQL_String = "UPDATE usuario SET nivelAcesso = '" + 2 + " 'WHERE rg = '" + rg + "'";
+        conexao.executeUpdate(SQL_String);
     }
 }
