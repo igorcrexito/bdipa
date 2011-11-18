@@ -35,7 +35,7 @@ public class Main {
 
         ////////////////////////////////////////////////////////////////////////
         //TESTE PARA EXCLUIR PACIENTE DO BANCO DE DADOS
-        /*pacDao.excluirPaciente(1);*/
+        System.out.println(pacDao.getPacientesBySexo(1));
 
 
 
