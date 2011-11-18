@@ -55,4 +55,63 @@ public class PacienteDAO {
         String SQL_String = "UPDATE pacientes SET idade = '" + idadeNova + "'WHERE id = '" + id + "'";
         conexao.executeSql(SQL_String);
     }
+
+    public String getPacientesBySexo(int sexoPaciente) throws SQLException {
+
+        String pacientes = "";
+        String SQL_string = "SELECT * FROM pacientes WHERE sexo LIKE '%" + sexoPaciente + "%'";
+        ResultSet rs = conexao.executeSql(SQL_string);
+
+        while (rs.next()) {
+            String ID = rs.getString("Id");
+            int sexo = rs.getInt("sexo");
+            int idade = rs.getInt("idade");
+            int raca = rs.getInt("raca");
+            String URL = rs.getString("urlImagem");
+            pacientes = pacientes + ID + "&" + sexo + "&" +idade + "&" + raca + "&" + URL + "#";
+            System.out.println("ID: " + ID + ", Sexo: " + sexo + ", Idade: " + idade + ", Raça: " + raca + ", URL: " + URL);
+        }
+        System.out.println("STRING GIGANTE: " + pacientes);
+        return pacientes;
+    }
+
+    public String getPacientesbByIdade(int minimo, int maximo) throws SQLException{
+
+        String pacientes = "";
+        String SQL_string = "SELECT * FROM pacientes where idade between '" + minimo + "' and '" + maximo + "'";
+        ResultSet rs = conexao.executeSql(SQL_string);
+
+        while (rs.next()) {
+            String ID = rs.getString("Id");
+            int sexo = rs.getInt("sexo");
+            int idade = rs.getInt("idade");
+            int raca = rs.getInt("raca");
+            String URL = rs.getString("urlImagem");
+            pacientes = pacientes + ID + "&" + sexo + "&" +idade + "&" + raca + "&" + URL + "#";
+            System.out.println("ID: " + ID + ", Sexo: " + sexo + ", Idade: " + idade + ", Raça: " + raca + ", URL: " + URL);
+        }
+        System.out.println("STRING GIGANTE: " + pacientes);
+        return pacientes;
+    }
+
+    public String getTodosPacientes() throws SQLException{
+
+        String pacientes = "";
+        String SQL_string = "SELECT * FROM pacientes ";
+        ResultSet rs = conexao.executeSql(SQL_string);
+
+        while (rs.next()) {
+            String ID = rs.getString("Id");
+            int sexo = rs.getInt("sexo");
+            int idade = rs.getInt("idade");
+            int raca = rs.getInt("raca");
+            String URL = rs.getString("urlImagem");
+
+            pacientes = pacientes + ID + "&" + sexo + "&" +idade + "&" + raca + "&" + URL + "#";
+            System.out.println("ID: " + ID + ", Sexo: " + sexo + ", Idade: " + idade + ", Raça: " + raca + ", URL: " + URL);
+        }
+        System.out.println("STRING GIGANTE: " + pacientes);
+        return pacientes;
+    }
+
 }
