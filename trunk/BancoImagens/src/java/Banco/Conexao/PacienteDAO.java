@@ -39,10 +39,10 @@ public class PacienteDAO {
         return paciente;
     }
 
-    public void inserirPaciente(int id, int sexo, int idade, String urlImagem) {
+    public void inserirPaciente(int idade, int sexo, int raca, String urlImagem) {
 
-        String SQL_String = "INSERT INTO pacientes (id, sexo, idade, urlImagem)"
-                + " VALUES ('" + id + "', '" + sexo + "', '" + idade + "', '" + urlImagem + "')";
+        String SQL_String = "INSERT INTO pacientes (idade, sexo, raca, urlImagem)"
+                + " VALUES ('" + idade + "', '" + sexo + "', '" + raca + "', '" + urlImagem + "')";
 
         conexao.execute(SQL_String);
     }
