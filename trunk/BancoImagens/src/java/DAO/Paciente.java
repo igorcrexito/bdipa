@@ -14,17 +14,19 @@ public class Paciente {
      private int sexo;
      private int idade;
      private String urlImagem;
+     private int raca;
 
 
     public Paciente () {
         this.urlImagem = null;
     }
 
-    public Paciente(int id, int sexo, int idade, String urlImagem) {
+    public Paciente(int id, int sexo, int idade, String urlImagem, int raca) {
         this.id = id;
         this.sexo = sexo;
         this.idade = idade;
         this.urlImagem = urlImagem;
+        this.raca = raca;
     }
 
     public int getId() {
@@ -58,6 +60,15 @@ public class Paciente {
     public void setUrlImagem(String urlImagem) {
         this.urlImagem = urlImagem;
     }
+
+    public int getRaca() {
+        return raca;
+    }
+
+    public void setRaca(int raca) {
+        this.raca = raca;
+    }
+
 
 
 }
