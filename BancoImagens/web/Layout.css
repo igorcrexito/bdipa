@@ -41,6 +41,14 @@
 
 }
 
+#galeria{
+
+    float:right;
+    margin-right: auto;
+    width: 300px;
+    height: 200px;
+}
+
 #msgLogin {
     float: left;
     width: 200px;

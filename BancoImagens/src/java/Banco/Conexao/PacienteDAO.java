@@ -7,6 +7,8 @@ package Banco.Conexao;
 import DAO.Paciente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -30,8 +32,9 @@ public class PacienteDAO {
         int sexo = rs.getInt("sexo");
         int idade = rs.getInt("idade");
         String urlImagem = rs.getString("urlImagem");
+        int raca = rs.getInt("raca");
 
-        paciente = new Paciente(id, sexo, idade, urlImagem);
+        paciente = new Paciente(id, sexo, idade, urlImagem,raca);
 
         return paciente;
     }
@@ -113,5 +116,27 @@ public class PacienteDAO {
         System.out.println("STRING GIGANTE: " + pacientes);
         return pacientes;
     }
+    
+     public List<Paciente> getTodosPacientesLista() throws SQLException{
+
+        List<Paciente> pacs = new ArrayList<Paciente>();
+        
+        String SQL_string = "SELECT * FROM pacientes ";
+        ResultSet rs = conexao.executeSql(SQL_string);
+        
+        while (rs.next()) {
+            String ID = rs.getString("Id");
+            int sexo = rs.getInt("sexo");
+            int idade = rs.getInt("idade");
+            int raca = rs.getInt("raca");
+            String URL = rs.getString("urlImagem");
+
+            Paciente pac = new Paciente(Integer.parseInt(ID), sexo, idade, URL, raca);
+            pacs.add(pac);
+        }
+       
+        return pacs;
+    }
+    
 
 }
