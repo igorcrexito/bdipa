@@ -27,7 +27,7 @@ public class FileUploadController {
             try {
                 UploadedFile arq = event.getFile();
                 InputStream in = new BufferedInputStream(arq.getInputstream());
-                File file = new File("/imagensPaciente/" + arq.getFileName());
+                File file = new File(arq.getFileName());
 
                 FileOutputStream fout = new FileOutputStream(file);
 
