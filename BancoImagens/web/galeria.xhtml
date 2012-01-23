@@ -16,7 +16,6 @@
 
 
     </h:head>
-        <h:form>
             <div id="header">
                 <div id="msgLogin">
                     <h:outputText rendered="#{userBean.logado}" value="Olá, #{userBean.nome}"></h:outputText>
@@ -28,14 +27,14 @@
                 <div id="barradivisora"></div>
                 <ui:include src="menuhorizontal.xhtml"></ui:include>
                 <br></br><br></br>
-                <h:body>
+                <body>
                     <div id="campos">
                     <f:view contentType="text/html">
-                        
+                        <f:event type="preRenderView" listener="#{pacBean.popularPacientes}"/>
                             <h4>Galeria de Imagens</h4>
                             <div id="barraTitulo"></div><br></br>
                             <div id="galeria">
-                                <p:carousel value="#{novoPacBean.pacientes}" itemStyle="height:400px;width:600px;" rows="1" var="paciente">
+                                <p:carousel value="#{pacBean.pacientes}" itemStyle="height:730px;width:600px;" rows="1" var="paciente">
                                     <h:panelGrid columns="1" cellpadding="5">
                                         <p:graphicImage value="#{paciente.urlImagem}"/>
 
@@ -47,47 +46,14 @@
                                     </h:panelGrid>
                                 </p:carousel>
                             </div>
-                            <h4>Cadastro de pacientes</h4>
-                            <div id="barraTitulo"></div><br></br>
-
-                            <h4>Defina a raça do paciente:</h4>
-                            <h:selectOneRadio value="#{novoPacBean.raca}">
-                                <f:selectItem itemValue="0" itemLabel="Negra" />
-                                <f:selectItem itemValue="1" itemLabel="Parda" />
-                                <f:selectItem itemValue="2" itemLabel="Amarela" />
-                                <f:selectItem itemValue="3" itemLabel="Branca" />
-                            </h:selectOneRadio><br></br>
-
-                            <h4>Sexo do paciente:</h4>
-                            <h:selectOneRadio value="#{novoPacBean.sexo}">
-                                <f:selectItem itemValue="0" itemLabel="Feminino" />
-                                <f:selectItem itemValue="1" itemLabel="Masculino" />
-                            </h:selectOneRadio><br></br>
-
-                            <h4>Determine a idade do paciente:</h4>
-                            <h:inputText style="width: 20px;" value="#{novoPacBean.idade}"></h:inputText>
-
-                            <h4>Imagem do paciente:</h4>
-                            <h:form enctype="multipart/form-data">
-                                <p:fileUpload fileUploadListener="#{novoPacBean.processFileUpload}"
-                                              mode="advanced"
-                                              update="messages"
-                                              sizeLimit="10000000"
-                                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>  
-                                <p:growl id="messages" showDetail="true"/>
-
-                            </h:form>
                             </f:view>
-                        <h:commandButton value="Cadastrar" action="#{novoPacBean.cadastrar}"></h:commandButton>
-                            
                             <br></br><br></br><br></br><br></br>
                         
                     </div>
-                </h:body>
+                </body>
 
                 <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
             </div>
-        </h:form>
 </html>
 
 
