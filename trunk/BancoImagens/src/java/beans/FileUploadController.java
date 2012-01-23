@@ -16,6 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -27,7 +28,12 @@ public class FileUploadController {
             try {
                 UploadedFile arq = event.getFile();
                 InputStream in = new BufferedInputStream(arq.getInputstream());
-                File file = new File(arq.getFileName());
+                
+                FacesContext facesContext = FacesContext.getCurrentInstance();
+                ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
+                String arquivo = scontext.getRealPath("/pacientes/" + arq.getFileName());
+
+                File file = new File(arquivo);
 
                 FileOutputStream fout = new FileOutputStream(file);
 
