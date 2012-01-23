@@ -16,7 +16,6 @@
 
 
     </h:head>
-    <f:view>
         <h:form>
             <div id="header">
                 <div id="msgLogin">
@@ -30,12 +29,13 @@
                 <ui:include src="menuhorizontal.xhtml"></ui:include>
                 <br></br><br></br>
                 <h:body>
+                    <div id="campos">
                     <f:view contentType="text/html">
-                        <div id="campos">
+                        
                             <h4>Galeria de Imagens</h4>
                             <div id="barraTitulo"></div><br></br>
                             <div id="galeria">
-                                <p:carousel value="#{pacBean.pacientes}" itemStyle="height:400px;width:600px;" rows="1" var="paciente">
+                                <p:carousel value="#{novoPacBean.pacientes}" itemStyle="height:400px;width:600px;" rows="1" var="paciente">
                                     <h:panelGrid columns="1" cellpadding="5">
                                         <p:graphicImage value="#{paciente.urlImagem}"/>
 
@@ -69,7 +69,7 @@
 
                             <h4>Imagem do paciente:</h4>
                             <h:form enctype="multipart/form-data">
-                                <p:fileUpload fileUploadListener="#{fileUploadController.processFileUpload}"
+                                <p:fileUpload fileUploadListener="#{novoPacBean.processFileUpload}"
                                               mode="advanced"
                                               update="messages"
                                               sizeLimit="10000000"
@@ -77,15 +77,17 @@
                                 <p:growl id="messages" showDetail="true"/>
 
                             </h:form>
-
-                        </div>
-                    </f:view>
+                            </f:view>
+                        <h:commandButton value="Cadastrar" action="#{novoPacBean.cadastrar}"></h:commandButton>
+                            
+                            <br></br><br></br><br></br><br></br>
+                        
+                    </div>
                 </h:body>
 
                 <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
             </div>
         </h:form>
-    </f:view>
 </html>
 
 
