@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Cadastro de Pacientes</title>
+    </h:head>
+    <h:body>
+        <div id="subcorpo2">
+            <div id="barradivisora"></div>
+            <ui:include src="menuhorizontal.xhtml"></ui:include>
+
+
+            <h:form>
+
+                <div id="formulario">
+                    <div id="campos">
+                        <div id="textoGrandeCentro"><h:outputText value="Cadastro de Pacientes"></h:outputText><br></br></div><br></br>
+                        <h:outputText value="Prencha os campos a seguir com seus dados cadastrais do paciente:"></h:outputText><br></br><br></br>
+
+                        <h:outputText value="Idade do paciente"></h:outputText><br></br>
+                        <h:inputText style="width: 15px;" value="#{pacBean.idade}"></h:inputText>
+                        <br></br><br></br>
+                        <h:outputText value="Raça do paciente"></h:outputText><br></br>
+                        <h:selectOneRadio value="#{pacBean.raca}">
+                            <f:selectItem itemValue="3" itemLabel="Negra" />
+                            <f:selectItem itemValue="2" itemLabel="Parda" />
+                            <f:selectItem itemValue="1" itemLabel="Branca" />
+                            <f:selectItem itemValue="0" itemLabel="Amarela" />
+                        </h:selectOneRadio>
+                        <br></br><br></br>
+                        <h:outputText value="Sexo do paciente"></h:outputText><br></br>
+                        <h:selectOneRadio value="#{pacBean.sexo}">
+                            <f:selectItem itemValue="1" itemLabel="Masculino" />
+                            <f:selectItem itemValue="0" itemLabel="Feminino" />
+                        </h:selectOneRadio>
+                    </div>
+
+                </div>
+            </h:form>
+            <h:form enctype="multipart/form-data">
+                <p:fileUpload fileUploadListener="#{pacBean.processFileUpload}"
+                              mode="advanced"
+                              update="messages"
+                              sizeLimit="10000000"
+                              allowTypes="/(\.|\/)(gif|jpe?g|png|tif?f)$/"/>
+                <p:growl id="messages" showDetail="true"/>
+
+            </h:form>
+        </div>
+
+
+    </h:body>
+    <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
+
+</html>
+
