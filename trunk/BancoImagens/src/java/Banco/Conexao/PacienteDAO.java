@@ -39,12 +39,13 @@ public class PacienteDAO {
         return paciente;
     }
 
-    public void inserirPaciente(int idade, int sexo, int raca, String urlImagem) {
+    public String inserirPaciente(int idade, int sexo, int raca, String urlImagem) {
 
-        String SQL_String = "INSERT INTO pacientes (idade, sexo, raca, urlImagem)"
-                + " VALUES ('" + idade + "', '" + sexo + "', '" + raca + "', '" + urlImagem + "')";
+         String SQL_String = "INSERT INTO pacientes (Id,sexo,idade,urlImagem,raca)"
+                + " VALUES (" +null+ ",'" + sexo + "', '" + idade + "', '" + urlImagem + "', '" + raca + "')";
 
         conexao.execute(SQL_String);
+        return "home.xhtml";
     }
 
     public void excluirPaciente(int id) throws SQLException {
