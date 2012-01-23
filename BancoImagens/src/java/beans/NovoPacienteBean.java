@@ -23,6 +23,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -61,15 +62,14 @@ public class NovoPacienteBean {
         this.pacientes = pacientes;
     }
 
-    public void cadastro() {
-        // teste = " " + email + "-" + instituicao + "-" + nome + "-" + rg + "-" + logar + "-" + password + "-" + nivelAcesso;
+    public String cadastrar() {
 
         try {
-            pacDao.inserirPaciente(idade, sexo, raca, urlImagem);
-
-
-        } catch (Exception ex) {
+              pacDao.inserirPaciente(idade, sexo, raca, urlImagem);
+              pacientes.add(new Paciente(pacientes.size(),sexo,idade,urlImagem,raca));} catch (Exception ex) {
+            ex.printStackTrace();
         }
+        return "home.xhtml";
     }
 
     public int getIdade() {
@@ -106,25 +106,31 @@ public class NovoPacienteBean {
 
     public void processFileUpload(FileUploadEvent event) throws IOException {
         try {
-//Cria um arquivo UploadFile, para receber o arquivo do evento
             UploadedFile arq = event.getFile();
             InputStream in = new BufferedInputStream(arq.getInputstream());
-//copiar para pasta do projeto
-            File file = new File("C:/" + arq.getFileName());
-//O método file.getAbsolutePath() fornece o caminho do arquivo criado
 
-//Pode ser usado para ligar algum objeto do banco ao arquivo enviado
-            urlImagem = file.getAbsolutePath();
-            FileOutputStream fout = new FileOutputStream(file);
-            while (in.available() != 0) {
-                fout.write(in.read());
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
+            String arquivo = scontext.getRealPath("/pacientes/" + arq.getFileName());
+            this.urlImagem = arquivo;
+
+            if (this.urlImagem != null) {
+
+                File file = new File(arquivo);
+
+                FileOutputStream fout = new FileOutputStream(file);
+
+                while (in.available() != 0) {
+                    fout.write(in.read());
+                }
+                fout.close();
+                FacesMessage msg = new FacesMessage("O Arquivo ", file.getName()
+                        + " salvo.");
+                FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
+           
             }
-            fout.close();
-            FacesMessage msg = new FacesMessage("O Arquivo ", file.getName() + " salvo.");
-            FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-
 }
