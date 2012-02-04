@@ -113,9 +113,9 @@ public class PacienteBean {
             UploadedFile arq = event.getFile();
 
             InputStream in = new BufferedInputStream(arq.getInputstream());
-            File file = new File("C://imagens//" + arq.getFileName());
+            File file = new File("C:/imagens/" + arq.getFileName());
 
-            urlImagem = "/pacientes/"+arq.getFileName();
+            urlImagem = "C:/imagens/"+arq.getFileName();
 
             FileOutputStream fout = new FileOutputStream(file);
 
@@ -125,9 +125,9 @@ public class PacienteBean {
 
             }
             cadastrar();
-            scale(urlImagem,600,800,"/pacientes/"+arq.getFileName());
             fout.close();
-
+            scale(urlImagem,400,300,"C:/imagens/"+"reduziada"+arq.getFileName());
+            
             FacesMessage msg = new FacesMessage("O Arquivo ", file.getName() + " salvo.");
 
             FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
@@ -140,15 +140,18 @@ public class PacienteBean {
     }
 
     public static void scale(String srcFile, int destWidth, int destHeight,
-            String destFile) throws IOException {
+        String destFile) throws IOException {
+
         BufferedImage src = ImageIO.read(new File(srcFile));
         BufferedImage dest = new BufferedImage(destWidth, destHeight,
                 BufferedImage.TYPE_INT_RGB);
         Graphics2D g = dest.createGraphics();
+
         AffineTransform at = AffineTransform.getScaleInstance(
                 (double) destWidth / src.getWidth(),
                 (double) destHeight / src.getHeight());
         g.drawRenderedImage(src, at);
         ImageIO.write(dest, "JPG", new File(destFile));
+        
     }
 }
