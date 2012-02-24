@@ -126,7 +126,7 @@ public class PacienteBean {
             }
             cadastrar();
             fout.close();
-            scale(urlImagem,400,300,"C:/imagens/"+"reduziada"+arq.getFileName());
+            scale(urlImagem,400,300,"C:/imagens/"+"reduzida"+arq.getFileName());
             
             FacesMessage msg = new FacesMessage("O Arquivo ", file.getName() + " salvo.");
 

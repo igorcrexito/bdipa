@@ -16,44 +16,52 @@
 
 
     </h:head>
-            <div id="header">
-                <div id="msgLogin">
-                    <h:outputText rendered="#{userBean.logado}" value="Olá, #{userBean.nome}"></h:outputText>
-                </div>
-                <ui:include src="campologin.xhtml"></ui:include>
-            </div>
+    <div id="header">
+        <div id="msgLogin">
+            <h:outputText rendered="#{userBean.logado}" value="Olá, #{userBean.nome}"></h:outputText>
+        </div>
+        <ui:include src="campologin.xhtml"></ui:include>
+    </div>
 
-            <div id="subcorpo2">
-                <div id="barradivisora"></div>
-                <ui:include src="menuhorizontal.xhtml"></ui:include>
-                <br></br><br></br>
-                <body>
-                    <div id="campos">
-                    <f:view contentType="text/html">
-                        <f:event type="preRenderView" listener="#{pacBean.popularPacientes}"/>
-                            <h4>Galeria de Imagens</h4>
-                            <div id="barraTitulo"></div><br></br>
-                            <div id="galeria">
-                                <p:carousel value="#{pacBean.pacientes}" itemStyle="height:730px;width:600px;" rows="1" var="paciente">
-                                    <h:panelGrid columns="1" cellpadding="5">
-                                        <p:graphicImage value="#{paciente.urlImagem}"/>
+    <div id="subcorpo2">
+        <div id="barradivisora"></div>
+        <ui:include src="menuhorizontal.xhtml"></ui:include>
+        <br></br><br></br>
+        <body>
+            <div id="campos">
+                <f:view contentType="text/html">
+                    <f:event type="preRenderView" listener="#{pacBean.popularPacientes}"/>
+                    <h4>Galeria de Imagens</h4>
+                    <div id="barraTitulo"></div><br></br>
+                    <div id="galeria">
+                        <p:carousel value="#{pacBean.pacientes}" itemStyle="height:730px;width:600px;" rows="1" var="paciente">
+                            <form action="" >
+                            <h:panelGrid columns="1" cellpadding="5">
+                                <p:graphicImage value="#{paciente.urlImagem}"/>
 
-                                        <h:outputText value="Idade: #{paciente.idade}" />
+                                <h:outputText value="Idade: #{paciente.idade}" />
 
-                                        <h:outputText value="Sexo: #{paciente.sexo}" />
+                                <h:outputText value="Sexo: #{paciente.sexoreal}" />
 
-                                        <h:outputText value="Raça: #{paciente.raca}" />
-                                    </h:panelGrid>
-                                </p:carousel>
-                            </div>
-                            </f:view>
-                            <br></br><br></br><br></br><br></br>
-                        
+                                <h:outputText value="Raça: #{paciente.racareal}" />
+
+                                <p:commandLink id="downloadLink" value="Download" ajax="false">
+                                        <p:fileDownload value="#{paciente.download}"></p:fileDownload>
+                                    </p:commandLink>
+                                
+                            </h:panelGrid>
+                           </form>
+
+                        </p:carousel>
                     </div>
-                </body>
+                </f:view>
+                <br></br><br></br><br></br><br></br>
 
-                <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
             </div>
+        </body>
+
+        <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
+    </div>
 </html>
 
 
