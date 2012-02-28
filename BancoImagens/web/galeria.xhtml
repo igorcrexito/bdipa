@@ -34,23 +34,25 @@
                     <h4>Galeria de Imagens</h4>
                     <div id="barraTitulo"></div><br></br>
                     <div id="galeria">
-                        <p:carousel value="#{pacBean.pacientes}" itemStyle="height:730px;width:600px;" rows="1" var="paciente">
+                        <p:carousel value="#{pacBean.pacientes}" itemStyle="height:760px;width:600px;" rows="1" var="paciente">
                             <form action="" >
-                            <h:panelGrid columns="1" cellpadding="5">
-                                <p:graphicImage value="#{paciente.urlImagem}"/>
+                                <h:panelGrid columns="1" cellpadding="5">
+                                    <p:graphicImage value="#{paciente.urlImagem}"/>
 
-                                <h:outputText value="Idade: #{paciente.idade}" />
+                                    <h:outputText value="Idade: #{paciente.idade}" />
 
-                                <h:outputText value="Sexo: #{paciente.sexoreal}" />
+                                    <h:outputText value="Sexo: #{paciente.sexoreal}" />
 
-                                <h:outputText value="Raça: #{paciente.racareal}" />
+                                    <h:outputText value="Raça: #{paciente.racareal}" />
 
-                                <p:commandLink id="downloadLink" value="Download" ajax="false">
-                                        <p:fileDownload value="#{paciente.download}"></p:fileDownload>
-                                    </p:commandLink>
-                                
-                            </h:panelGrid>
-                           </form>
+                                    <h:form>
+                                        <p:commandLink id="downloadLink" value="Download" ajax="false">
+                                            <p:fileDownload value="#{fileDownload.file}" />
+                                        </p:commandLink>
+                                    </h:form>
+                                </h:panelGrid>
+
+                            </form>
 
                         </p:carousel>
                     </div>
@@ -59,6 +61,7 @@
 
             </div>
         </body>
+
 
         <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
     </div>

@@ -5,6 +5,8 @@
 
 package beans;
 import java.io.InputStream;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
@@ -14,12 +16,14 @@ import org.primefaces.model.StreamedContent;
  *
  * @author PH
  */
+@ManagedBean(name = "fileDownload")
+@SessionScoped
 public class FileDownloadController {
 private StreamedContent file;
 
     public FileDownloadController(String url) {
         InputStream stream = ((ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream(url);
-        file = new DefaultStreamedContent(stream, "image/jpg", "downloaded_optimus.jpg");
+        file = new DefaultStreamedContent(stream, "image/jpg", "C:/Users/PH/Desktop/trunk/BancoImagens/web/imagensPaciente/raiox.jpg");
     }
 
     public StreamedContent getFile() {
