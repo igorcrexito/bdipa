@@ -34,31 +34,27 @@
                     <h4>Galeria de Imagens</h4>
                     <div id="barraTitulo"></div><br></br>
                     <div id="galeria">
-                        <p:carousel value="#{pacBean.pacientes}" itemStyle="height:760px;width:600px;" rows="1" var="paciente">
-                            <form action="" >
+                        <p:carousel value="#{pacBean.pacientes}" itemStyle="height:730px;width:600px;" rows="1" var="paciente">
+                            <h:form>
                                 <h:panelGrid columns="1" cellpadding="5">
-                                    <p:graphicImage value="#{paciente.urlImagem}"/>
-
+                                    <p:graphicImage value="/imagensPaciente/#{paciente.urlImagem}">
+                                        <f:param id="id_paciente" name="id_paciente" value="#{paciente.id}" />
+                                    </p:graphicImage>
                                     <h:outputText value="Idade: #{paciente.idade}" />
-
                                     <h:outputText value="Sexo: #{paciente.sexoreal}" />
-
                                     <h:outputText value="Raça: #{paciente.racareal}" />
-
-                                    <h:form>
-                                        <p:commandLink id="downloadLink" value="Download" ajax="false">
-                                            <p:fileDownload value="#{fileDownload.file}" />
-                                        </p:commandLink>
-                                    </h:form>
+                                   
                                 </h:panelGrid>
-
-                            </form>
-
+                            </h:form>
                         </p:carousel>
                     </div>
                 </f:view>
-                <br></br><br></br><br></br><br></br>
-
+                <div id="galeria">
+                    <h:form>
+                        <h:commandLink  value="DOWNLOAD DESTA IMAGEM" action="#{pacBean.downloadFile}" immediate="true"/>
+                    </h:form>
+                    <br></br><br></br><br></br><br></br>
+                </div>
             </div>
         </body>
 

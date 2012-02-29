@@ -9,6 +9,7 @@ import Banco.Conexao.PacienteDAO;
 import Banco.Conexao.UsuarioDAO;
 import DAO.Paciente;
 import DAO.Usuario;
+import classes.OperacoesArquivos;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -25,6 +26,7 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
 import org.primefaces.event.FileUploadEvent;
@@ -115,7 +117,7 @@ public class PacienteBean {
             InputStream in = new BufferedInputStream(arq.getInputstream());
             File file = new File("C:/imagens/" + arq.getFileName());
 
-            urlImagem = "C:/imagens/"+arq.getFileName();
+            urlImagem = "C:/imagens/" + arq.getFileName();
 
             FileOutputStream fout = new FileOutputStream(file);
 
@@ -126,8 +128,8 @@ public class PacienteBean {
             }
             cadastrar();
             fout.close();
-            scale(urlImagem,400,300,"C:/imagens/"+"reduzida"+arq.getFileName());
-            
+            scale(urlImagem, 400, 300, "C:/imagens/" + "reduzida" + arq.getFileName());
+
             FacesMessage msg = new FacesMessage("O Arquivo ", file.getName() + " salvo.");
 
             FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
@@ -140,7 +142,7 @@ public class PacienteBean {
     }
 
     public static void scale(String srcFile, int destWidth, int destHeight,
-        String destFile) throws IOException {
+            String destFile) throws IOException {
 
         BufferedImage src = ImageIO.read(new File(srcFile));
         BufferedImage dest = new BufferedImage(destWidth, destHeight,
@@ -152,6 +154,17 @@ public class PacienteBean {
                 (double) destHeight / src.getHeight());
         g.drawRenderedImage(src, at);
         ImageIO.write(dest, "JPG", new File(destFile));
-        
+
+    }
+
+    public String downloadFile() {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        String id = externalContext.getRequestParameterMap().get("paciente_Id"); //tem q pegar o id dinâmico
+
+        this.urlImagem = pacientes.get(0).getUrlImagem(); //não tá dinâmico
+        OperacoesArquivos.downloadFile(this.urlImagem, "C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/web/imagensPaciente/", "jpg", FacesContext.getCurrentInstance()); //colocar path do servidor
+       
+        return "gotoDownload";
+
     }
 }
