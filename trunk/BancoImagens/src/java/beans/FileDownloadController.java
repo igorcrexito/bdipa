@@ -23,7 +23,7 @@ private StreamedContent file;
 
     public FileDownloadController(String url) {
         InputStream stream = ((ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream(url);
-        file = new DefaultStreamedContent(stream, "image/jpg", "C:/Users/PH/Desktop/trunk/BancoImagens/web/imagensPaciente/raiox.jpg");
+        file = new DefaultStreamedContent(stream, "image/jpg", "/imagensPaciente/raiox.jpg");
     }
 
     public StreamedContent getFile() {

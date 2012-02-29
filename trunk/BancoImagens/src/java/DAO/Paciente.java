@@ -74,7 +74,7 @@ public class Paciente {
 
    public StreamedContent download (){
 
-   return imagem.getFile();
+        return imagem.getFile();
    }
 
     public String getRacareal() {
