@@ -50,9 +50,14 @@
                 <br></br><br></br>
 
             </div>
-            <h:form>
-                <h:commandLink  value="DOWNLOAD DESTA IMAGEM" action="#{pacBean.downloadFile}" immediate="true"/>
-            </h:form>
+            <div id="galeria">
+                <h:form>
+                    <h:selectOneMenu value="#{pacBean.opcaoImagem}">
+                        <f:selectItems value="#{pacBean.pacientes}" var="paciente" itemLabel="Imagem Nº #{paciente.id}" itemValue="#{paciente.id}" />
+                    </h:selectOneMenu>
+                    <h:commandButton  value="DOWNLOAD" action="#{pacBean.downloadFile}"/>
+                </h:form>
+            </div>
         </body>
 
 
