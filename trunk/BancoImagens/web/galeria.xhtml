@@ -22,40 +22,37 @@
         </div>
         <ui:include src="campologin.xhtml"></ui:include>
     </div>
-
     <div id="subcorpo2">
         <div id="barradivisora"></div>
         <ui:include src="menuhorizontal.xhtml"></ui:include>
         <br></br><br></br>
         <body>
+            <f:view contentType="text/html">
+                <f:event type="preRenderView" listener="#{pacBean.popularPacientes}"/>
+            </f:view>
             <div id="campos">
-                <f:view contentType="text/html">
-                    <f:event type="preRenderView" listener="#{pacBean.popularPacientes}"/>
-                    <h4>Galeria de Imagens</h4>
-                    <div id="barraTitulo"></div><br></br>
-                    <div id="galeria">
-                        <p:carousel value="#{pacBean.pacientes}" itemStyle="height:730px;width:600px;" rows="1" var="paciente">
-                            <h:form>
-                                <h:panelGrid columns="1" cellpadding="5">
-                                    <p:graphicImage value="/imagensPaciente/#{paciente.urlImagem}">
-                                        <f:param id="id_paciente" name="id_paciente" value="#{paciente.id}" />
-                                    </p:graphicImage>
-                                    <h:outputText value="Idade: #{paciente.idade}" />
-                                    <h:outputText value="Sexo: #{paciente.sexoreal}" />
-                                    <h:outputText value="Raça: #{paciente.racareal}" />
-                                   
-                                </h:panelGrid>
-                            </h:form>
-                        </p:carousel>
-                    </div>
-                </f:view>
+                <h4>Galeria de Imagens</h4>
+                <div id="barraTitulo"></div><br></br>
                 <div id="galeria">
-                    <h:form>
-                        <h:commandLink  value="DOWNLOAD DESTA IMAGEM" action="#{pacBean.downloadFile}" immediate="true"/>
-                    </h:form>
-                    <br></br><br></br><br></br><br></br>
+
+                    <p:carousel value="#{pacBean.pacientes}" itemStyle="height:760px;width:600px;" rows="1" var="paciente">
+                        <h:panelGrid columns="1" cellpadding="5">
+                            <p:graphicImage value="/imagensPaciente/#{paciente.urlImagem}">
+                                <f:param id="paciente" name="paciente" value="#{paciente.id}" />
+                            </p:graphicImage>
+                            <h:outputText value="Nº da imagem: #{paciente.id}" />
+                            <h:outputText value="Idade: #{paciente.idade}" />
+                            <h:outputText value="Sexo: #{paciente.sexoreal}" />
+                            <h:outputText value="Raça: #{paciente.racareal}" />
+                        </h:panelGrid>
+                    </p:carousel>
                 </div>
+                <br></br><br></br>
+
             </div>
+            <h:form>
+                <h:commandLink  value="DOWNLOAD DESTA IMAGEM" action="#{pacBean.downloadFile}" immediate="true"/>
+            </h:form>
         </body>
 
 
