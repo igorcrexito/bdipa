@@ -9,6 +9,12 @@
     <h:head>
         <title>Cadastro de Pacientes</title>
     </h:head>
+    <div id="header">
+        <div id="msgLogin">
+            <h:outputText rendered="#{userBean.logado}" value="Olá, #{userBean.nome}"></h:outputText>
+        </div>
+        <ui:include src="campologin.xhtml"></ui:include>
+    </div>
     <h:body>
         <div id="subcorpo2">
             <div id="barradivisora"></div>
@@ -19,27 +25,32 @@
 
                 <div id="formulario">
                     <div id="campos">
-                        <div id="textoGrandeCentro"><h:outputText value="Cadastro de Pacientes"></h:outputText><br></br></div><br></br>
-                        <h:outputText value="Prencha os campos a seguir com seus dados cadastrais do paciente:"></h:outputText><br></br><br></br>
+                        <h2><div id="textoGrandeCentro"><h:outputText value="Cadastro de Pacientes"></h:outputText><br></br></div></h2><br></br>
+                        <h3><h:outputText value="Prencha os campos a seguir com seus dados cadastrais do paciente:"></h:outputText></h3><br></br>
 
-                        <h:outputText value="Idade do paciente"></h:outputText><br></br>
-                        <h:inputText style="width: 15px;" value="#{pacBean.idade}"></h:inputText>
-                        <br></br><br></br>
-                        <h:outputText value="Raça do paciente"></h:outputText><br></br>
+                        <h4><h:outputText value="Idade do paciente"></h:outputText></h4>
+                        <h:inputText style="width: 20px;" value="#{pacBean.idade}"></h:inputText>
+                        
+                        <h4><h:outputText value="Raça do paciente"></h:outputText></h4>
                         <h:selectOneRadio value="#{pacBean.raca}">
                             <f:selectItem itemValue="3" itemLabel="Negra" />
                             <f:selectItem itemValue="2" itemLabel="Parda" />
                             <f:selectItem itemValue="1" itemLabel="Branca" />
                             <f:selectItem itemValue="0" itemLabel="Amarela" />
                         </h:selectOneRadio>
-                        <br></br><br></br>
-                        <h:outputText value="Sexo do paciente"></h:outputText><br></br>
+                        
+                        <h4><h:outputText value="Sexo do paciente"></h:outputText></h4>
                         <h:selectOneRadio value="#{pacBean.sexo}">
-                            <f:selectItem itemValue="1" itemLabel="Masculino" />
-                            <f:selectItem itemValue="0" itemLabel="Feminino" />
+                            <f:selectItem itemValue="0" itemLabel="Masculino" />
+                            <f:selectItem itemValue="1" itemLabel="Feminino" />
                         </h:selectOneRadio>
                     </div>
-
+                    <br></br>
+                    <div id="barraTitulo"></div>
+                    <br></br>
+                        <h:commandButton action="#{pacBean.cadastrar}" value="Cadastrar"/>
+                        <br></br><br></br>
+                        <h:outputText value="Apenas realize o cadastro após fazer o upload da imagem do paciente"></h:outputText><br></br>
                 </div>
             </h:form>
             <h:form enctype="multipart/form-data">
@@ -49,7 +60,7 @@
                               sizeLimit="10000000"
                               allowTypes="/(\.|\/)(gif|jpe?g|png|tif?f)$/"/>
                 <p:growl id="messages" showDetail="true"/>
-
+            
             </h:form>
         </div>
 

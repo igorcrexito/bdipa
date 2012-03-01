@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.el.ELResolver;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -46,6 +47,7 @@ public class PacienteBean {
     private String urlImagem;
     private int sexo;
     private int raca;
+    private int opcaoImagem;
 
     public int getIdade() {
         return idade;
@@ -79,10 +81,6 @@ public class PacienteBean {
         this.urlImagem = urlImagem;
     }
 
-    public PacienteBean() {
-        popularPacientes();
-    }
-
     public void popularPacientes() {
         try {
             this.pacientes = pacDao.getTodosPacientesLista();
@@ -102,7 +100,7 @@ public class PacienteBean {
     public void cadastrar() {
 
         try {
-            pacDao.inserirPaciente(this.idade, this.sexo, this.raca, this.urlImagem);
+            pacDao.inserirPaciente(this.idade, this.sexo, this.raca, urlImagem);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -117,7 +115,8 @@ public class PacienteBean {
             InputStream in = new BufferedInputStream(arq.getInputstream());
             File file = new File("C:/imagens/" + arq.getFileName());
 
-            urlImagem = "C:/imagens/" + arq.getFileName();
+            urlImagem = arq.getFileName();
+            //urlImagem = "C:/imagens/" + arq.getFileName();
 
             FileOutputStream fout = new FileOutputStream(file);
 
@@ -126,7 +125,7 @@ public class PacienteBean {
                 fout.write(in.read());
 
             }
-            cadastrar();
+            //cadastrar();
             fout.close();
             scale(urlImagem, 400, 300, "C:/imagens/" + "reduzida" + arq.getFileName());
 
@@ -139,6 +138,22 @@ public class PacienteBean {
             ex.printStackTrace();
 
         }
+    }
+
+    public int getOpcaoImagem() {
+        return opcaoImagem;
+    }
+
+    public void setOpcaoImagem(int opcaoImagem) {
+        this.opcaoImagem = opcaoImagem;
+    }
+
+    public PacienteDAO getPacDao() {
+        return pacDao;
+    }
+
+    public void setPacDao(PacienteDAO pacDao) {
+        this.pacDao = pacDao;
     }
 
     public static void scale(String srcFile, int destWidth, int destHeight,
@@ -158,12 +173,9 @@ public class PacienteBean {
     }
 
     public String downloadFile() {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        String id = externalContext.getRequestParameterMap().get("paciente_Id"); //tem q pegar o id dinâmico
-
-        this.urlImagem = pacientes.get(0).getUrlImagem(); //não tá dinâmico
+        this.urlImagem = pacientes.get(opcaoImagem).getUrlImagem();
         OperacoesArquivos.downloadFile(this.urlImagem, "C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/web/imagensPaciente/", "jpg", FacesContext.getCurrentInstance()); //colocar path do servidor
-       
+
         return "gotoDownload";
 
     }
