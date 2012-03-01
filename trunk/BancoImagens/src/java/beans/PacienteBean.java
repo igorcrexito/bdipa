@@ -29,6 +29,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.imageio.ImageIO;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -48,6 +49,19 @@ public class PacienteBean {
     private int sexo;
     private int raca;
     private int opcaoImagem;
+    private List<SelectItem> colecao;
+
+    public List<SelectItem> getColecao() {
+        colecao = new ArrayList<SelectItem>();
+        for (int i=0;i<pacientes.size();i++) {
+            colecao.add(new SelectItem(pacientes.get(i).getId()));
+        }
+        return colecao;
+    }
+
+    public void setColecao(List<SelectItem> colecao) {
+        this.colecao = colecao;
+    }
 
     public int getIdade() {
         return idade;
@@ -173,10 +187,11 @@ public class PacienteBean {
     }
 
     public String downloadFile() {
+
         this.urlImagem = pacientes.get(opcaoImagem).getUrlImagem();
         OperacoesArquivos.downloadFile(this.urlImagem, "C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/web/imagensPaciente/", "jpg", FacesContext.getCurrentInstance()); //colocar path do servidor
-
         return "gotoDownload";
-
     }
+
+
 }
