@@ -127,7 +127,7 @@ public class PacienteBean {
             UploadedFile arq = event.getFile();
 
             InputStream in = new BufferedInputStream(arq.getInputstream());
-            File file = new File("C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/web/imagensPaciente/reduzida" + arq.getFileName());
+            File file = new File("C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/web/imagensPaciente/" + arq.getFileName());
 
             urlImagem = "reduzida"+arq.getFileName();
             //urlImagem = "C:/imagens/" + arq.getFileName();
@@ -141,7 +141,8 @@ public class PacienteBean {
             }
             //cadastrar();
             fout.close();
-            scale(urlImagem, 600, 800, "C:/imagens/" + "reduzida" + arq.getFileName());
+            scale("C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/web/imagensPaciente/"+arq.getFileName(), 600, 600, "C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/web/imagensPaciente/reduzida" + arq.getFileName());
+            scale("C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/web/imagensPaciente/"+arq.getFileName(), 600, 600, "C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/build/web/imagensPaciente/reduzida" + arq.getFileName());
 
             FacesMessage msg = new FacesMessage("O Arquivo ", file.getName() + " salvo.");
 
