@@ -48,6 +48,15 @@ public class PacienteDAO {
         return "home.xhtml";
     }
 
+    public String inserirPaciente(int id,int idade, int sexo, int raca, String urlImagem) {
+
+         String SQL_String = "INSERT INTO pacientes (Id,sexo,idade,urlImagem,raca)"
+                + " VALUES (" +id+ ",'" + sexo + "', '" + idade + "', '" + urlImagem + "', '" + raca + "')";
+
+        conexao.execute(SQL_String);
+        return "home.xhtml";
+    }
+
     public void excluirPaciente(int id) throws SQLException {
 
         String SQL_String = "delete from pacientes where id='" + id + "'";
