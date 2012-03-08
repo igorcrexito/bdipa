@@ -254,7 +254,19 @@ public class UserBean {
 
      public void isAdmin(){
 
-	if (this.nivelAcesso!=1){
+	if (this.nivelAcesso!=2){
+                FacesContext fc = FacesContext.getCurrentInstance();
+		ConfigurableNavigationHandler nav
+		   = (ConfigurableNavigationHandler)
+			fc.getApplication().getNavigationHandler();
+
+		nav.performNavigation("erro");
+	}
+    }
+
+       public void isCadastrado(){
+
+	if (this.nivelAcesso<1){
                 FacesContext fc = FacesContext.getCurrentInstance();
 		ConfigurableNavigationHandler nav
 		   = (ConfigurableNavigationHandler)

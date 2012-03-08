@@ -16,10 +16,12 @@
         <ui:include src="campologin.xhtml"></ui:include>
     </div>
     <h:body>
+        <f:view>
+            <f:event type="preRenderView" listener="#{userBean.isAdmin}"/>
+        </f:view>
         <div id="subcorpo2">
             <div id="barradivisora"></div>
             <ui:include src="menuhorizontal.xhtml"></ui:include>
-
 
             <h:form>
 
@@ -30,7 +32,7 @@
 
                         <h4><h:outputText value="Idade do paciente"></h:outputText></h4>
                         <h:inputText style="width: 20px;" value="#{pacBean.idade}"></h:inputText>
-                        
+
                         <h4><h:outputText value="Raça do paciente"></h:outputText></h4>
                         <h:selectOneRadio value="#{pacBean.raca}">
                             <f:selectItem itemValue="3" itemLabel="Negra" />
@@ -38,7 +40,7 @@
                             <f:selectItem itemValue="1" itemLabel="Branca" />
                             <f:selectItem itemValue="0" itemLabel="Amarela" />
                         </h:selectOneRadio>
-                        
+
                         <h4><h:outputText value="Sexo do paciente"></h:outputText></h4>
                         <h:selectOneRadio value="#{pacBean.sexo}">
                             <f:selectItem itemValue="0" itemLabel="Masculino" />
@@ -48,9 +50,9 @@
                     <br></br>
                     <div id="barraTitulo"></div>
                     <br></br>
-                        <h:commandButton action="#{pacBean.cadastrar}" value="Cadastrar"/>
-                        <br></br><br></br>
-                        <h:outputText value="Apenas realize o cadastro após fazer o upload da imagem do paciente"></h:outputText><br></br>
+                    <h:commandButton action="#{pacBean.cadastrar}" value="Cadastrar"/>
+                    <br></br><br></br>
+                    <h:outputText value="Apenas realize o cadastro após fazer o upload da imagem do paciente"></h:outputText><br></br>
                 </div>
             </h:form>
             <h:form enctype="multipart/form-data">
@@ -60,10 +62,9 @@
                               sizeLimit="10000000"
                               allowTypes="/(\.|\/)(gif|jpe?g|png|tif?f)$/"/>
                 <p:growl id="messages" showDetail="true"/>
-            
+
             </h:form>
         </div>
-
 
     </h:body>
     <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
