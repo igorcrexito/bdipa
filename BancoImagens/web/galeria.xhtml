@@ -16,6 +16,9 @@
 
 
     </h:head>
+    <f:view>
+            <f:event type="preRenderView" listener="#{userBean.isCadastrado}"/>
+        </f:view>
     <div id="header">
         <div id="msgLogin">
             <h:outputText rendered="#{userBean.logado}" value="Olá, #{userBean.nome}"></h:outputText>
@@ -35,7 +38,7 @@
                 <div id="barraTitulo"></div><br></br>
                 <div id="galeria">
 
-                    <p:carousel value="#{pacBean.pacientes}" itemStyle="height:760px;width:600px;" rows="1" var="paciente">
+                    <p:carousel value="#{pacBean.pacientes}" itemStyle="height:760px;width:610px;" rows="1" var="paciente">
                         <h:panelGrid columns="1" cellpadding="5">
                             <p:graphicImage value="/imagensPaciente/#{paciente.urlImagem}">
                                 <f:param id="paciente" name="paciente" value="#{paciente.id}" />
