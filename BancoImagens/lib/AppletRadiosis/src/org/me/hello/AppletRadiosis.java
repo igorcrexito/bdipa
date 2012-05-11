@@ -1,17 +1,32 @@
 package org.me.hello;
 
+import Traçados.Medidas;
+import Traçados.Tracado;
+import Traçados.TracadoDowns;
+import Traçados.TracadoHarvold;
+import Traçados.TracadoSteiner;
+import estruturas.eventos.CarregarEstruturas;
+import eventos.MouseEventos;
 import gui.PainelPrincipal;
+import gui.PontosCefalometricos;
+import gui.TelaResultados;
 import java.awt.Dimension;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import java.util.Locale;
+import javax.media.jai.JAI;
+import javax.media.jai.PlanarImage;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import processamento.HistogramaLimiar;
+import processamento.OperadorBinarizacao;
 import processamento.OperadorBordas;
+import processamento.OperadorGrayscale;
+import processamento.OperadorNegativo;
 
 /*
  * To change this template, choose Tools | Templates
@@ -23,7 +38,6 @@ import processamento.OperadorBordas;
  *
  * Created on 14/09/2011, 15:26:23
  */
-
 /**
  *
  * @author Igor
@@ -32,11 +46,20 @@ public class AppletRadiosis extends javax.swing.JApplet {
 
     /** Initializes the applet AppletRadiosis */
     PainelPrincipal painel;
-    BufferedImage original;
-    BufferedImage atual;
+    PlanarImage original;
+    PlanarImage atual;
+    MouseEventos eventos;
+    DefaultListModel modelo = new DefaultListModel();
+    OperadorBinarizacao opera = new OperadorBinarizacao();
+    HistogramaLimiar histogram = new HistogramaLimiar();
+    OperadorGrayscale gray = new OperadorGrayscale();
+    int limiar = 0;
+    Tracado tracado;
+
     public void init() {
         try {
             java.awt.EventQueue.invokeAndWait(new Runnable() {
+
                 public void run() {
                     try {
                         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -45,6 +68,7 @@ public class AppletRadiosis extends javax.swing.JApplet {
                     }
                     initComponents();
                     iniciaDisplay();
+                    
                 }
             });
         } catch (Exception ex) {
@@ -52,15 +76,28 @@ public class AppletRadiosis extends javax.swing.JApplet {
         }
     }
 
+    private void inicializaLista(ArrayList<PontosCefalometricos> listadosPontosdoTracado) {
+        listaPontosInterface.setModel(modelo);
+        for (int i = 0; i < listadosPontosdoTracado.size(); i++) {
+            modelo.addElement(listadosPontosdoTracado.get(i).getNome());
+        }
+    }
 
-   private void iniciaDisplay() {
-      setSize(new Dimension(800,500));
-      principal.setSize(new Dimension(800,500));
-      painel = new PainelPrincipal();
-      principal.add(painel);
-      principal.repaint();
-      
-   }
+    private void iniciaDisplay() {
+        setSize(new Dimension(880, 1100));
+        principal.setSize(new Dimension(880, 1100));
+        painel = new PainelPrincipal();
+        CarregarEstruturas carregar = new CarregarEstruturas();
+        painel.setEstruturas(carregar.getEstruturas());
+        principal.add(painel);
+        
+        eventos = new MouseEventos();
+        eventos.setPrincipal(painel);
+        painel.addMouseListener(eventos);
+        painel.addMouseMotionListener(eventos);
+        principal.repaint();
+    }
+
     /** This method is called from within the init() method to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -70,12 +107,31 @@ public class AppletRadiosis extends javax.swing.JApplet {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         principal = new javax.swing.JPanel();
-        barraAcoes = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        Abrir = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        Binarizacao = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaPontosInterface = new javax.swing.JList();
+        listaTracados = new javax.swing.JComboBox();
+        Tracar = new javax.swing.JButton();
+        GerarResultados = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        EstruturasCombo = new javax.swing.JComboBox();
+        verEstrutura = new javax.swing.JButton();
+        AdicionarPonto = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        Transladar = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(236, 233, 216));
 
         principal.setBackground(new java.awt.Color(255, 255, 255));
         principal.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -84,31 +140,31 @@ public class AppletRadiosis extends javax.swing.JApplet {
         principal.setLayout(principalLayout);
         principalLayout.setHorizontalGroup(
             principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 597, Short.MAX_VALUE)
+            .addGap(0, 770, Short.MAX_VALUE)
         );
         principalLayout.setVerticalGroup(
             principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 348, Short.MAX_VALUE)
+            .addGap(0, 513, Short.MAX_VALUE)
         );
 
-        barraAcoes.setBorder(null);
-        barraAcoes.setOrientation(1);
-        barraAcoes.setRollover(true);
+        jTabbedPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Skull.png"))); // NOI18N
-        jButton1.setToolTipText("Abrir Imagem");
-        jButton1.setBorderPainted(false);
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Abrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Skull.png"))); // NOI18N
+        Abrir.setToolTipText("Abrir Imagem");
+        Abrir.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Abrir.setBorderPainted(false);
+        Abrir.setFocusable(false);
+        Abrir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Abrir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Abrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AbrirActionPerformed(evt);
             }
         });
-        barraAcoes.add(jButton1);
 
-        jButton2.setText("Negativo");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Negativo.png"))); // NOI18N
+        jButton2.setToolTipText("Obtenção do negativo da imagem");
+        jButton2.setBorderPainted(false);
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -117,9 +173,22 @@ public class AppletRadiosis extends javax.swing.JApplet {
                 jButton2ActionPerformed(evt);
             }
         });
-        barraAcoes.add(jButton2);
 
-        jButton3.setText("Bordas");
+        Binarizacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Binarizacao.png"))); // NOI18N
+        Binarizacao.setToolTipText("Binariza a imagem");
+        Binarizacao.setBorderPainted(false);
+        Binarizacao.setFocusable(false);
+        Binarizacao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Binarizacao.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Binarizacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BinarizacaoActionPerformed(evt);
+            }
+        });
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Bordas.png"))); // NOI18N
+        jButton3.setToolTipText("Detecta as bordas da imagem");
+        jButton3.setBorderPainted(false);
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -128,9 +197,9 @@ public class AppletRadiosis extends javax.swing.JApplet {
                 jButton3ActionPerformed(evt);
             }
         });
-        barraAcoes.add(jButton3);
 
-        jButton4.setText("Resetar");
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Resetar.png"))); // NOI18N
+        jButton4.setToolTipText("Reseta a imagem para a imagem original");
         jButton4.setBorderPainted(false);
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -140,51 +209,212 @@ public class AppletRadiosis extends javax.swing.JApplet {
                 jButton4ActionPerformed(evt);
             }
         });
-        barraAcoes.add(jButton4);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Abrir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                    .addComponent(jButton2)
+                    .addComponent(Binarizacao)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Abrir, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Binarizacao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addContainerGap(99, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Efeitos", jPanel1);
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ponto.png"))); // NOI18N
+        jButton5.setToolTipText("Marca o ponto");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setViewportView(listaPontosInterface);
+
+        listaTracados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Harvold", "Steiner", "Downs" }));
+        listaTracados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaTracadosActionPerformed(evt);
+            }
+        });
+
+        Tracar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tracar.png"))); // NOI18N
+        Tracar.setToolTipText("Realiza o traçado cefalométrico");
+        Tracar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TracarActionPerformed(evt);
+            }
+        });
+
+        GerarResultados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Resultados.png"))); // NOI18N
+        GerarResultados.setToolTipText("Gerar os resultados dos traçados");
+        GerarResultados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GerarResultadosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(listaTracados, 0, 93, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(GerarResultados)
+                    .addComponent(Tracar))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(listaTracados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Tracar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(GerarResultados)
+                .addContainerGap(67, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Traçados", jPanel2);
+
+        EstruturasCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Molar Superior", "Molar Inferior", "Incisivo Superior", "Incisivo Inferior", "Sela", "Pório", "Órbita", "Fosse Pterigo Maxilar", "Maxila", "Mandibula", "Sínfise", "Ossos Nasais", "Frontal", "Tecido Mole Superior", "Tecido Mole Inferior" }));
+
+        verEstrutura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/VerEstrutura.png"))); // NOI18N
+        verEstrutura.setToolTipText("Torna visível ou não a estrutura");
+        verEstrutura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verEstruturaActionPerformed(evt);
+            }
+        });
+
+        AdicionarPonto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/AdicionarPonto.png"))); // NOI18N
+        AdicionarPonto.setToolTipText("Adiciona Pontos na estrutura");
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Remover.png"))); // NOI18N
+        jButton1.setToolTipText("Remove pontos da estrutura");
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Rotacionar.png"))); // NOI18N
+        jButton6.setToolTipText("Rotaciona a estrutura");
+
+        Transladar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Translada.png"))); // NOI18N
+        Transladar.setToolTipText("Translada estrutura inteira");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(EstruturasCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, 93, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(verEstrutura, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+                    .addComponent(AdicionarPonto, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+                    .addComponent(Transladar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(EstruturasCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(verEstrutura)
+                .addGap(18, 18, 18)
+                .addComponent(AdicionarPonto)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton6)
+                .addGap(18, 18, 18)
+                .addComponent(Transladar)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Estruturas", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(barraAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(barraAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                .addContainerGap())
             .addComponent(principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       JFileChooser fchooser = new JFileChooser();
-       fchooser.setCurrentDirectory( new File( "C:" ) );
-       int returnVal = fchooser.showOpenDialog( AppletRadiosis.this );
-       fchooser.setFileFilter(new FileNameExtensionFilter("Image files", "bmp", "png", "jpg","tiff"));
-       fchooser.setAcceptAllFileFilterUsed(false);
+    private void AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirActionPerformed
 
-       if ( returnVal == JFileChooser.APPROVE_OPTION )   {
-          // fchooser.showOpenDialog(this);
-            try {
-              original = ImageIO.read(new File(fchooser.getSelectedFile().getAbsolutePath()));
-            } catch (IOException ex) {
-                Logger.getLogger(AppletRadiosis.class.getName()).log(Level.SEVERE, null, ex);
-            }
-           atual = original;
-           painel.setImage(atual);
-       }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        JFileChooser fchooser = new JFileChooser();
+        fchooser.setAcceptAllFileFilterUsed(false);
+        fchooser.setFileFilter(new FileNameExtensionFilter("Image files", "bmp", "png", "jpg", "tif?f"));
+        fchooser.setDialogTitle("Escolha a imagem para abrir");
+
+        if (fchooser.showDialog(null, "Carregar Arquivo") == JFileChooser.APPROVE_OPTION) {
+            original = JAI.create("fileload", fchooser.getSelectedFile().getAbsolutePath());
+
+            gray.setImage(original);
+            original = gray.convertImageToGrayScale();
+            atual = original;
+            painel.setImage(atual);
+
+        }
+    }//GEN-LAST:event_AbrirActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      
+        atual = OperadorNegativo.aplicaNegativo(atual);
         painel.setImage(atual);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         OperadorBordas bordas = new OperadorBordas();
-
+        bordas.setImage(atual);
+        atual = bordas.detectaBordas();
         painel.setImage(atual);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -193,14 +423,101 @@ public class AppletRadiosis extends javax.swing.JApplet {
         painel.setImage(atual);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        painel.setPontoEscolhido((String) modelo.get(listaPontosInterface.getSelectedIndex()));
+        if ((String) modelo.get(listaPontosInterface.getSelectedIndex()) != null) {
+            eventos.setMarcando(true);
+            modelo.remove(listaPontosInterface.getSelectedIndex());
+            listaPontosInterface.repaint();
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void BinarizacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BinarizacaoActionPerformed
+        opera.setImage(atual);
+        limiar = histogram.limiarOtimo(atual);
+        atual = opera.binarizaImagem(limiar);
+        painel.setImage(atual);
+    }//GEN-LAST:event_BinarizacaoActionPerformed
+
+    private void listaTracadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaTracadosActionPerformed
+        modelo.removeAllElements();
+        painel.setListaPontos(new ArrayList<PontosCefalometricos>());
+        painel.repaint();
+        if (listaTracados.getSelectedItem().equals("Harvold")) {
+            tracado = new TracadoHarvold();
+        } else if (listaTracados.getSelectedItem().equals("Steiner")) {
+            tracado = new TracadoSteiner();
+        } else if (listaTracados.getSelectedItem().equals("Downs")) {
+            tracado = new TracadoDowns();
+        }
+        inicializaLista(tracado.carregaPontos());
+        painel.setTracadoEscolhido(tracado);
+    }//GEN-LAST:event_listaTracadosActionPerformed
+
+    private void TracarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TracarActionPerformed
+        if (painel.isTracar()) {
+            painel.setTracar(false);
+        } else {
+            painel.setTracar(true);
+        }
+
+        painel.repaint();
+        principal.repaint();
+    }//GEN-LAST:event_TracarActionPerformed
+
+    private void GerarResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerarResultadosActionPerformed
+
+        TelaResultados telaResultados = new TelaResultados(); //cria janela de resultados
+        ArrayList<Medidas> medidas = tracado.getListaMedidas(); //pega as medidas do traçado
+        DefaultTableModel modelo = telaResultados.getModel(); //pega Model da tabela pra setar as medidas    
+        modelo.setRowCount(0); //zera o número de linhas
+
+        for (int i = 0; i < medidas.size(); i++) { //preenche tabela
+            Object linhaTabela[] = {medidas.get(i).getNome(), medidas.get(i).getValor()};
+            modelo.addRow(linhaTabela);
+        }
+
+        telaResultados.repaint();
+        telaResultados.setLocale(this.getLocale());
+        telaResultados.setVisible(true);
+    }//GEN-LAST:event_GerarResultadosActionPerformed
+
+    private void verEstruturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verEstruturaActionPerformed
+        String estrutura = (String) EstruturasCombo.getSelectedItem();
+        for (int i=0;i<painel.getEstruturas().size();i++) {
+            if (painel.getEstruturas().get(i).getNome().equals(estrutura)) {
+                if (painel.getEstruturas().get(i).isVisivel())
+                    painel.getEstruturas().get(i).setVisivel(false);
+                else
+                    painel.getEstruturas().get(i).setVisivel(true);
+            }
+        }
+        painel.repaint();
+    }//GEN-LAST:event_verEstruturaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToolBar barraAcoes;
+    private javax.swing.JButton Abrir;
+    private javax.swing.JButton AdicionarPonto;
+    private javax.swing.JButton Binarizacao;
+    private javax.swing.JComboBox EstruturasCombo;
+    private javax.swing.JButton GerarResultados;
+    private javax.swing.JButton Tracar;
+    private javax.swing.JButton Transladar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JList listaPontosInterface;
+    private javax.swing.JComboBox listaTracados;
     private javax.swing.JPanel principal;
+    private javax.swing.JButton verEstrutura;
     // End of variables declaration//GEN-END:variables
-
 }
