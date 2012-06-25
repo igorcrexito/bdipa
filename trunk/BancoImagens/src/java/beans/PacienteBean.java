@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.el.ELResolver;
@@ -42,6 +43,7 @@ import org.primefaces.model.UploadedFile;
 @SessionScoped
 public class PacienteBean {
 
+    boolean filtroflag = false;
     private List<Paciente> pacientes;
     PacienteDAO pacDao = new PacienteDAO(ConexaoBD.getConexaoBD());
     private int idade;
@@ -50,6 +52,13 @@ public class PacienteBean {
     private int raca;
     private int opcaoImagem;
     private List<SelectItem> colecao;
+    private int filtroidadeinicial=0;
+    private int filtroidadefinal=0;
+    private int filtroraca=4;
+    private int filtrosexo=2;
+    boolean flagidade = false;
+    boolean flagsexo = false;
+    boolean flagraca = false;
 
     public List<SelectItem> getColecao() {
         colecao = new ArrayList<SelectItem>();
@@ -96,11 +105,101 @@ public class PacienteBean {
     }
 
     public void popularPacientes() {
+        if (!filtroflag) {
+            try {
+                this.pacientes = pacDao.getTodosPacientesLista();
+            } catch (SQLException ex) {
+                Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public String filtrar() {
+
+        flagidade = false;
+        flagraca = false;
+        flagsexo=false;
+
+        if (this.filtroidadefinal!=0 && this.filtroidadeinicial<this.filtroidadefinal)
+            flagidade = true;
+        if (this.filtroraca!=4)
+            flagraca = true;
+        if (this.filtrosexo!=2)
+            flagsexo = true;
+
+        ArrayList<Paciente> pacfiltrados = new ArrayList<Paciente>();
         try {
             this.pacientes = pacDao.getTodosPacientesLista();
         } catch (SQLException ex) {
             Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+        for (int i=0;i<pacientes.size();i++) {
+            if (flagidade ==true && flagraca == false && flagsexo==false) {
+                if ((pacientes.get(i).getIdade()>=this.filtroidadeinicial && pacientes.get(i).getIdade()<=this.filtroidadefinal)) {
+                    pacfiltrados.add(pacientes.get(i));
+                }
+            }
+
+            if (flagidade ==false && flagraca == true && flagsexo==false)
+                if (pacientes.get(i).getRaca()==this.filtroraca) {
+                    pacfiltrados.add(pacientes.get(i));
+                }
+
+            if (flagidade ==false && flagraca == false && flagsexo==true)
+                if (pacientes.get(i).getSexo()==this.filtrosexo) {
+                    pacfiltrados.add(pacientes.get(i));
+                }
+
+            if (flagidade ==true && flagraca == true && flagsexo==false) {
+                if ((pacientes.get(i).getIdade()>=this.filtroidadeinicial && pacientes.get(i).getIdade()<=this.filtroidadefinal)) {
+                    if (pacientes.get(i).getRaca()==this.filtroraca)
+                        pacfiltrados.add(pacientes.get(i));
+                }
+            }
+
+            if (flagidade ==true && flagraca == false &&flagsexo==true) {
+                if ((pacientes.get(i).getIdade()>=this.filtroidadeinicial && pacientes.get(i).getIdade()<=this.filtroidadefinal)) {
+                    if (pacientes.get(i).getSexo()==this.filtrosexo)
+                        pacfiltrados.add(pacientes.get(i));
+                }
+            }
+
+            if (flagidade ==false && flagraca == true && flagsexo==true) {
+                if (pacientes.get(i).getRaca()==this.filtroraca) {
+                    if (pacientes.get(i).getSexo()==this.filtrosexo)
+                        pacfiltrados.add(pacientes.get(i));
+                }
+            }
+
+
+            if (flagidade ==true && flagraca == true && flagsexo==true) {
+                if ((pacientes.get(i).getIdade()>=this.filtroidadeinicial && pacientes.get(i).getIdade()<=this.filtroidadefinal)) {
+                    if (pacientes.get(i).getRaca()==this.filtroraca)
+                        if (pacientes.get(i).getSexo()==this.filtrosexo)
+                            pacfiltrados.add(pacientes.get(i));
+                }
+            }
+
+
+
+        }
+
+        pacientes = pacfiltrados;
+        filtroflag = true;
+        return "galeria.xhtml";
+    }
+
+    public String resetar() {
+
+        filtroflag = false;
+        flagidade = false;
+        flagsexo = false;
+        flagraca = false;
+        this.filtroidadefinal=0;
+        this.filtroidadefinal =0;
+        this.filtroraca = 4;
+        this.filtrosexo = 2;
+        return "galeria.xhtml";
     }
 
     public List<Paciente> getPacientes() {
@@ -127,7 +226,7 @@ public class PacienteBean {
             UploadedFile arq = event.getFile();
 
             InputStream in = new BufferedInputStream(arq.getInputstream());
-            File file = new File("C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/web/imagensPaciente/" + arq.getFileName());
+            File file = new File("C:/Documents and Settings/Igor-Note/Meus documentos/NetBeansProjects/trunk/BancoImagens/web/imagensPaciente/" + arq.getFileName());
 
             urlImagem = "reduzida"+arq.getFileName();
             //urlImagem = "C:/imagens/" + arq.getFileName();
@@ -141,8 +240,8 @@ public class PacienteBean {
             }
             //cadastrar();
             fout.close();
-            scale("C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/web/imagensPaciente/"+arq.getFileName(), 600, 600, "C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/web/imagensPaciente/reduzida" + arq.getFileName());
-            scale("C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/web/imagensPaciente/"+arq.getFileName(), 600, 600, "C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/build/web/imagensPaciente/reduzida" + arq.getFileName());
+            scale("C:/Documents and Settings/Igor-Note/Meus documentos/NetBeansProjects/trunk/BancoImagens/web/imagensPaciente/"+arq.getFileName(), 600, 600, "C:/Documents and Settings/Igor-Note/Meus documentos/NetBeansProjects/trunk/BancoImagens/web/imagensPaciente/reduzida" + arq.getFileName());
+            scale("C:/Documents and Settings/Igor-Note/Meus documentos/NetBeansProjects/trunk/BancoImagens/web/imagensPaciente/"+arq.getFileName(), 600, 600, "C:/Documents and Settings/Igor-Note/Meus documentos/NetBeansProjects/trunk/BancoImagens/build/web/imagensPaciente/reduzida" + arq.getFileName());
 
             FacesMessage msg = new FacesMessage("O Arquivo ", file.getName() + " salvo.");
 
@@ -189,10 +288,47 @@ public class PacienteBean {
 
     public String downloadFile() {
 
-        this.urlImagem = pacientes.get(opcaoImagem).getUrlImagem();
-        OperacoesArquivos.downloadFile(this.urlImagem, "C:/Documents and Settings/Igor/Meus documentos/trunk/BancoImagens/web/imagensPaciente/", "jpg", FacesContext.getCurrentInstance()); //colocar path do servidor
+        for (int i=0;i<pacientes.size();i++) {
+            if (this.opcaoImagem==pacientes.get(i).getId()) {
+                this.urlImagem = pacientes.get(i).getUrlImagem();
+                this.urlImagem = urlImagem.substring(8);
+                break;
+            }
+        }
+
+        OperacoesArquivos.downloadFile(this.urlImagem, "C:/Documents and Settings/Igor-Note/Meus documentos/NetBeansProjects/bancoImagens2/bancoImagens/web/imagensPaciente/", "jpg", FacesContext.getCurrentInstance()); //colocar path do servidor
         return "gotoDownload";
     }
 
+    public int getFiltroidadefinal() {
+        return filtroidadefinal;
+    }
 
+    public void setFiltroidadefinal(int filtroidadefinal) {
+        this.filtroidadefinal = filtroidadefinal;
+    }
+
+    public int getFiltroidadeinicial() {
+        return filtroidadeinicial;
+    }
+
+    public void setFiltroidadeinicial(int filtroidadeinicial) {
+        this.filtroidadeinicial = filtroidadeinicial;
+    }
+
+    public int getFiltroraca() {
+        return filtroraca;
+    }
+
+    public void setFiltroraca(int filtroraca) {
+        this.filtroraca = filtroraca;
+    }
+
+    public int getFiltrosexo() {
+        return filtrosexo;
+    }
+
+    public void setFiltrosexo(int filtrosexo) {
+        this.filtrosexo = filtrosexo;
+    }
 }

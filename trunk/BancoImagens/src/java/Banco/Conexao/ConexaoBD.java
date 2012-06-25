@@ -1,5 +1,6 @@
 package Banco.Conexao;
 
+import classes.Propriedades;
 import java.sql.*;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -31,10 +32,14 @@ public class ConexaoBD {
 
     private ConexaoBD() {//construtor privado, pois ninguem poderá dar um new na classe
 
-        this.DRIVER_JBDC = "com.mysql.jdbc.Driver";
-        this.URL = "jdbc:mysql://localhost/pa_uefs";
-        this.usuario = "root";
-        this.senha = "papapop12";
+        //this.DRIVER_JBDC = "com.mysql.jdbc.Driver";
+        //this.URL = "jdbc:mysql://localhost/pa_uefs";
+        //this.usuario = "root";
+        //this.senha = "papapop12";
+        Propriedades prop = new Propriedades();
+        //prop.criarPropriedades(this);
+        prop.carregarPropriedades(this);
+        System.out.println(this.DRIVER_JBDC + " driver");
         conecta();
 
     }
@@ -136,4 +141,37 @@ public class ConexaoBD {
             Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public String getDRIVER_JBDC() {
+        return DRIVER_JBDC;
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setDRIVER_JBDC(String DRIVER_JBDC) {
+        this.DRIVER_JBDC = DRIVER_JBDC;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
 }
