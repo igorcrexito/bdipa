@@ -40,7 +40,7 @@ public class Propriedades {
     public void carregarPropriedades(ConexaoBD conexao) {
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream("/conexao.properties"));
+            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("conexao.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
