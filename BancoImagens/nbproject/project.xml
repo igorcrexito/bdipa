@@ -19,10 +19,6 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.AppletAssinado.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
                     <file>${file.reference.commons-email-1.2-javadoc.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
@@ -64,6 +60,10 @@
                 </library>
                 <library dirs="200">
                     <file>${file.reference.primefaces-3.0.1.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.Applet_Assinada.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>

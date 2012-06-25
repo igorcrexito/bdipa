@@ -228,7 +228,7 @@ public class UserBean {
                 this.login = user.getLogin();
                 naologado = false;
                 logado = true;
-                if (user.getNivelAcesso()==1) {
+                if (user.getNivelAcesso()==2) {
                     return "admin.xhtml";
                  } else {
                     return null;
