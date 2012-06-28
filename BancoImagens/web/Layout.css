@@ -27,18 +27,44 @@
     background: url(imagens/textos.JPG) no-repeat;
 }
 
+#interfaceApplet {
+    height: 500px;
+    width:900px;
+    margin-left: 35px;
+    background: url(imagens/painelApplet.png) no-repeat;
+}
+
+#efeitosApplet {
+    height: 400px;
+    width:800px;
+    margin-left: 135px;
+    background: url(imagens/appletPainelEfeitos.png) no-repeat;
+}
+
+#tracadosApplet {
+    height: 650px;
+    width:800px;
+    margin-left: 135px;
+    background: url(imagens/appletPainelTracados.png) no-repeat;
+}
+
+#estruturasApplet {
+    height: 535px;
+    width:800px;
+    margin-left: 135px;
+    background: url(imagens/appletPainelEstruturas.png) no-repeat;
+}
+
+
 #areaTexto {
     margin-left: 15%;
 }
 
 #campoLogin{
-
     float:right;
     margin-right: 10px;
     width: 200px;
     height: 150px;
-
-
 }
 
 #galeria{
