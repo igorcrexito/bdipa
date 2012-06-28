@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>BANCO DE IMAGENS CEFALOMÉTRICAS</title>
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <link href="Layout.css" rel="stylesheet" type="text/css" media="screen" />
+
+
+    </h:head>
+    <body>
+        <f:view>
+           <h:form>
+                <div id="header">
+                    <div id="msgLogin">
+                        <h:outputText rendered="#{userBean.logado}" value="Olá, #{userBean.nome}"></h:outputText>
+                    </div>
+                    <ui:include src="campologin.xhtml"></ui:include>
+                </div>
+
+                <div id="subcorpo2">
+                    <div id="barradivisora"></div>
+                    <ui:include src="menuhorizontal.xhtml"></ui:include>
+                    <h4></h4>
+                    <div id="subcorpo">
+                        <div style="margin-left: 20px"><h2>Tutorial para uso da Applet</h2></div>
+                           <div id="tituloInterno">
+                                <h:outputText escape="false" value="Conhecendo a Interface"></h:outputText>
+                            </div>
+                            <div id="barraTitulo"></div>
+                            <div id="textoInterno">
+                                 <h:outputText escape="false" value="A Applet para traçados cefalométricos apresenta uma interface simples,
+                                             onde as rotinas podem ser facilmente acessadas pelos usuários. Nota-se, do lado esquerdo, a presença
+                                             de um painel onde as imagens radiográficas são exibidas. Do lado direito, 3 abas são disponibilizadas, sendo
+                                             cadas uma delas melhor descrita nas seções posteriores."></h:outputText>
+                                <div id="interfaceApplet"></div>
+                            </div>
+                            <br></br><br></br>
+                            <div id="tituloInterno">
+                                <h:outputText escape="false" value="Aba de Efeitos"></h:outputText>
+                            </div>
+                             <div id="barraTitulo"></div>
+                             <div id="textoInterno">
+                                 <h:outputText escape="false" value="Na aba de efeitos, são disponibilizadas rotinas para abertura da imagem
+                                               desejada pelo usuário, além de rotinas de processamento digital de imagens, as quais provêem
+                                               melhoras no tocante à visualização das estruturas ósseas, dentárias e moles da imagem radiográfica
+                                               que está sendo utilizada. Vale ressaltar que os efeitos aplicados são acumulativos e que é disponibilizada
+                                               ao usuário a possibilidade de resetar a imagem para a imagem originalmente aberta."></h:outputText>
+                                 <br></br><br></br>
+                                 <div id="efeitosApplet"></div>
+                            </div>
+                             <br></br><br></br>
+                            <div id="tituloInterno">
+                                <h:outputText escape="false" value="Aba de Traçados"></h:outputText>
+                            </div>
+                             <div id="barraTitulo"></div>
+                             <div id="textoInterno">
+                                 <h:outputText escape="false" value="Na aba de traçados, alguns dos traçados mais comumente utilizados por especialistas podem ser acessados.
+                                               Nesta aba, é disponibilizado um recurso para marcação dos pontos cefalométricos do traçado que se deseja realizar, além de
+                                               da possibilidade de, o usuário, gerar o traçado correspondente a estas marcações e obter resultados abordados pelo traçado escolhido.
+                                               É válido lembrar que, para que se tenha uma noção correta das distâncias, é necessário ao usuário calibrá-las marcando sobre a imagem 
+                                               uma estimativa de 2cm (deve-se utilizar as réguas presentes nas imagens cefalométricas)."></h:outputText>
+                                 <br></br><br></br>
+                                 <div id="tracadosApplet"></div>
+                            </div>
+                             <br></br><br></br>
+                            <div id="tituloInterno">
+                                <h:outputText escape="false" value="Aba de Estruturas"></h:outputText>
+                            </div>
+                             <div id="barraTitulo"></div>
+                             <div id="textoInterno">
+                                 <h:outputText escape="false" value="Na aba de estruturas, podem ser encontrados modelos de estruturas anatômicas que podem auxiliar na marcação dos
+                                               pontos cefalométricos. Estas estruturas apresentam um molde padrão e devem ser ajustadas segunda a imagem utilizada.
+                                               Para ajuste das estruturas, alguns recursos são disponibilizados."></h:outputText>
+                                 <br></br><br></br>
+                                 <div id="estruturasApplet"></div>
+                                 <br></br><br></br>
+                                 <h:outputText escape="false" value="É importante lembrar que os efeitos de translação, rotação, adição de pontos e remoção de pontos
+                                               só pode ser aplicado sobre estruturas ativas. Por sua vez, o ajuste fino (mover pontos individualmente) deve ser feito
+                                               sobre estruturas inativas (em amarelo) e é feito clicando-se sobre o ponto que se deseja mover e arrastando-o para onde
+                                               se deseja."></h:outputText>
+                                 <br></br><br></br>
+                            </div>
+                             
+                           
+                    </div> 
+                    <div id="footer"><div id="sign"><p>Copyright &copy; 2012 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
+                </div>
+            </h:form>
+        </f:view>
+    </body>
+</html>
+
+
+
