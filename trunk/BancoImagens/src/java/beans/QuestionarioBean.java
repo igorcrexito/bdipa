@@ -78,7 +78,7 @@ public class QuestionarioBean {
         this.sugestoesCriticas = sugestoesCriticas;
     }
 
-    public void cadastrarQuestionario() {
+    public String cadastrarQuestionario() {
         
         questDAO.inserirQuestionario(experienciaTracados, experienciaSoftware, avaliacaoApplet, nomeCompleto, sugestoesCriticas, formacaoAcademica);
 
@@ -88,6 +88,8 @@ public class QuestionarioBean {
         this.formacaoAcademica = "";
         this.nomeCompleto = "";
         this.sugestoesCriticas = "";
+        
+        return "home.xhtml";
     }
 
 }

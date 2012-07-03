@@ -15,8 +15,7 @@
 
 
     </h:head>
-    <f:view>
-        <h:form>
+    <h:body>
             <div id="header">
                 <div id="msgLogin">
                     <h:outputText rendered="#{userBean.logado}" value="Olá, #{userBean.nome}"></h:outputText>
@@ -29,8 +28,7 @@
                 <ui:include src="menuhorizontal.xhtml"></ui:include>
                 <br></br><br></br>
                 <div style="margin-left: 15px"><h2>Questionário para avaliação da Applet</h2></div>
-                <body>
-                    <div id="subcorpo">
+                        <h:form>
                         <div id="tituloInterno">
                             <h:outputText escape="false" value="Nome completo:"></h:outputText>
                         </div>
@@ -83,11 +81,9 @@
                         <div style="margin-left: 15px"><h:inputTextarea style="width: 980px;" value="#{questBean.sugestoesCriticas}"></h:inputTextarea></div>
                         <br></br>
                         <div style="margin-left:15px"><h:commandButton action="#{questBean.cadastrarQuestionario}" value="Cadastrar"/></div>
-                    </div>
-                </body>
-                <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
+                       </h:form>
+                <div id="footer"><div id="sign"><p>Copyright &copy; 2012 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
             </div>
-        </h:form>
-    </f:view>
+</h:body>
 </html>
 
