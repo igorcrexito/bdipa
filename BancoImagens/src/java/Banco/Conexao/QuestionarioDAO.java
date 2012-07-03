@@ -17,13 +17,12 @@ public class QuestionarioDAO {
         this.conexao = conexao;
     }
 
-      public String inserirQuestionario(int experienciaTracados, int experienciaSofts, int avaliacao, String nomeCompleto, String sugestoesCriticas, String formacao) {
+      public void inserirQuestionario(int experienciaTracados, int experienciaSofts, int avaliacao, String nomeCompleto, String sugestoesCriticas, String formacao) {
 
         String SQL_String = "INSERT INTO questionario (Id, nome, formacao, experienciaArea, experienciaSofts, avaliacao, sugestoescriticas)"
-                + " VALUES ('"+null+"', '" +nomeCompleto+ "', '" +formacao+ "', '" +experienciaTracados+ "', '" +experienciaSofts
+                + " VALUES ('"+0+"', '" +nomeCompleto+ "', '" +formacao+ "', '" +experienciaTracados+ "', '" +experienciaSofts
                 + "', '" +avaliacao+ "', '" +sugestoesCriticas+ "')";
 
-        conexao.executeSql(SQL_String);
-        return "home.xhtml";
+        conexao.execute(SQL_String);
     }
 }
