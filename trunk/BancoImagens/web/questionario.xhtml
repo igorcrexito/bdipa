@@ -8,84 +8,86 @@
     <h:head>
 
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>BANCO DE IMAGENS CEFALOMÉTRICAS - APPLET</title>
+        <title>BANCO DE IMAGENS CEFALOMÉTRICAS - QUESTIONÁRIO</title>
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <link href="Layout.css" rel="stylesheet" type="text/css" media="screen" />
 
 
     </h:head>
-        <f:view>
-            <h:form>
-                <div id="header">
-                    <div id="msgLogin">
-                        <h:outputText rendered="#{userBean.logado}" value="Olá, #{userBean.nome}"></h:outputText>
-                    </div>
-                    <ui:include src="campologin.xhtml"></ui:include>
+    <f:view>
+        <h:form>
+            <div id="header">
+                <div id="msgLogin">
+                    <h:outputText rendered="#{userBean.logado}" value="Olá, #{userBean.nome}"></h:outputText>
                 </div>
+                <ui:include src="campologin.xhtml"></ui:include>
+            </div>
 
-                <div id="subcorpo2">
-                    <div id="barradivisora"></div>
-                    <ui:include src="menuhorizontal.xhtml"></ui:include>
-                    <br></br><br></br>
-                    <div style="margin-left: 15px"><h2>Questionário para avaliação da Applet</h2></div>
-                    <body>
-                        <div id="subcorpo">
-                            <div id="tituloInterno">
-                                <h:outputText escape="false" value="Nome completo:"></h:outputText>
-                            </div>
-                            <div id="barraTitulo"></div>
-                            <div style="margin-left: 20px"><h:inputText style="width: 450px;" value="#{pacBean.idade}"></h:inputText></div>
-                            <br></br><br></br>
-                            <div id="tituloInterno">
-                                <h:outputText escape="false" value="Qual a sua formação acadêmica?"></h:outputText>
-                            </div>
-                            <div id="barraTitulo"></div>
-                            <div style="margin-left: 20px"><h:inputText style="width: 450px;" value="#{pacBean.idade}"></h:inputText></div>
-                            <br></br><br></br>
-                            <div id="tituloInterno">
-                                <h:outputText escape="false" value="Como você avalia a sua experiência com o uso de traçados cefalométricos?"></h:outputText>
-                            </div>
-                            <div id="barraTitulo"></div>
-                            <div style="margin-left: 15px"><h:selectOneRadio value="#{pacBean.raca}">
-                            <f:selectItem itemValue="3" itemLabel="Nunca os utilizei" />
-                            <f:selectItem itemValue="2" itemLabel="Utilizei poucas vezes alguns poucos traçados" />
-                            <f:selectItem itemValue="1" itemLabel="Utilizei poucas vezes muitos traçados" />
-                            <f:selectItem itemValue="0" itemLabel="Utilizei muitas vezes muitos traçados" />
-                            </h:selectOneRadio></div>
-                            <br></br><br></br>
-                            <div id="tituloInterno">
-                                <h:outputText escape="false" value="Como você avalia sua experiência com softwares para realização de traçados cefalométricos?"></h:outputText>
-                            </div>
-                            <div id="barraTitulo"></div>
-                            <div style="margin-left: 15px"><h:selectOneRadio value="#{pacBean.raca}">
-                            <f:selectItem itemValue="3" itemLabel="Nunca utilizei" />
-                            <f:selectItem itemValue="2" itemLabel="Utilizei alguns poucos softwares poucas vezes" />
-                            <f:selectItem itemValue="1" itemLabel="Utilizei alguns poucos softwares muitas vezes" />
-                            <f:selectItem itemValue="0" itemLabel="Utilizei muitos softwares muitas vezes" />
-                            </h:selectOneRadio></div>
-                            <br></br><br></br>
-                            <div id="tituloInterno">
-                                <h:outputText escape="false" value="Como você avalia a applet? Leve em consideração facilidade de uso, eficiência e precisão nos resultados."></h:outputText>
-                            </div>
-                            <div id="barraTitulo"></div>
-                            <div style="margin-left: 15px"><h:selectOneRadio value="#{pacBean.raca}">
-                            <f:selectItem itemValue="3" itemLabel="Ruim" />
-                            <f:selectItem itemValue="2" itemLabel="Razoável" />
-                            <f:selectItem itemValue="1" itemLabel="Boa" />
-                            <f:selectItem itemValue="0" itemLabel="Ótima" />
-                            </h:selectOneRadio></div>
-                            <br></br><br></br>
-                            <div id="tituloInterno">
-                                <h:outputText escape="false" value="Faça sugestões, críticas ou reporte qualquer erro presente na Applet."></h:outputText>
-                            </div>
-                            <div id="barraTitulo"></div>
-                            <div style="margin-left: 15px"><h:inputTextarea style="width: 800px;" value="#{pacBean.idade}"></h:inputTextarea></div>
+            <div id="subcorpo2">
+                <div id="barradivisora"></div>
+                <ui:include src="menuhorizontal.xhtml"></ui:include>
+                <br></br><br></br>
+                <div style="margin-left: 15px"><h2>Questionário para avaliação da Applet</h2></div>
+                <body>
+                    <div id="subcorpo">
+                        <div id="tituloInterno">
+                            <h:outputText escape="false" value="Nome completo:"></h:outputText>
                         </div>
-                    </body>
-                    <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
-                </div>
-            </h:form>
-        </f:view>
+                        <div id="barraTitulo"></div>
+                        <div style="margin-left: 20px"><h:inputText style="width: 450px;" value="#{questBean.nomeCompleto}"></h:inputText></div>
+                        <br></br><br></br>
+                        <div id="tituloInterno">
+                            <h:outputText escape="false" value="Qual a sua formação acadêmica?"></h:outputText>
+                        </div>
+                        <div id="barraTitulo"></div>
+                        <div style="margin-left: 20px"><h:inputText style="width: 450px;" value="#{questBean.formacaoAcademica}"></h:inputText></div>
+                        <br></br><br></br>
+                        <div id="tituloInterno">
+                            <h:outputText escape="false" value="Como você avalia a sua experiência com o uso de traçados cefalométricos?"></h:outputText>
+                        </div>
+                        <div id="barraTitulo"></div>
+                        <div style="margin-left: 15px"><h:selectOneRadio layout="pageDirection" value="#{questBean.experienciaTracados}">
+                                <f:selectItem itemValue="3" itemLabel="Nunca os utilizei" />
+                                <f:selectItem itemValue="2" itemLabel="Pouca. Utilizei poucas vezes este recurso." />
+                                <f:selectItem itemValue="1" itemLabel="Moderada. Utilizei algumas vezes este recurso." />
+                                <f:selectItem itemValue="0" itemLabel="Extensa. Utilizei muitas vezes este recurso." />
+                            </h:selectOneRadio></div>
+                        <br></br><br></br>
+                        <div id="tituloInterno">
+                            <h:outputText escape="false" value="Como você avalia sua experiência com softwares para realização de traçados cefalométricos?"></h:outputText>
+                        </div>
+                        <div id="barraTitulo"></div>
+                        <div style="margin-left: 15px"><h:selectOneRadio layout="pageDirection" value="#{questBean.experienciaSoftware}">
+                                <f:selectItem itemValue="3" itemLabel="Nunca utilizei" />
+                                <f:selectItem itemValue="2" itemLabel="Pouca. Utilizei poucas vezes softwares com este recurso." />
+                                <f:selectItem itemValue="1" itemLabel="Moderada. Utilizei algumas vezes softwares com este recurso." />
+                                <f:selectItem itemValue="0" itemLabel="Extensa. Utilizei muitos softwares com este recurso." />
+                            </h:selectOneRadio></div>
+                        <br></br><br></br>
+                        <div id="tituloInterno">
+                            <h:outputText escape="false" value="Como você avalia a applet? Leve em consideração facilidade de uso, eficiência e precisão nos resultados."></h:outputText>
+                        </div>
+                        <div id="barraTitulo"></div>
+                        <div style="margin-left: 15px"><h:selectOneRadio layout="pageDirection" value="#{questBean.avaliacaoApplet}">
+                                <f:selectItem itemValue="3" itemLabel="Ruim" />
+                                <f:selectItem itemValue="2" itemLabel="Razoável" />
+                                <f:selectItem itemValue="1" itemLabel="Boa" />
+                                <f:selectItem itemValue="0" itemLabel="Ótima" />
+                            </h:selectOneRadio></div>
+                        <br></br><br></br>
+                        <div id="tituloInterno">
+                            <h:outputText escape="false" value="Faça sugestões, críticas ou reporte qualquer erro presente na Applet."></h:outputText>
+                        </div>
+                        <div id="barraTitulo"></div>
+                        <div style="margin-left: 15px"><h:inputTextarea style="width: 980px;" value="#{questBean.sugestoesCriticas}"></h:inputTextarea></div>
+                        <br></br>
+                        <div style="margin-left:15px"><h:commandButton action="#{questBean.cadastrarQuestionario}" value="Cadastrar"/></div>
+                    </div>
+                </body>
+                <div id="footer"><div id="sign"><p>Copyright &copy; 2011 BANCO DE IMAGENS. Developed by BDIPA Ltda.</p></div></div>
+            </div>
+        </h:form>
+    </f:view>
 </html>
 
