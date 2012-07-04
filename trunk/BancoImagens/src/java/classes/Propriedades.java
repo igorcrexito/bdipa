@@ -48,5 +48,16 @@ public class Propriedades {
         conexao.setSenha(properties.getProperty("conexao.senha"));
 
     }
+    
+    public static String retornaCaminho() {
+        Properties properties = new Properties();
+        
+        try {
+            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("conexao.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }  
+        return properties.getProperty("conexao.caminho");
+    }
 
 }
