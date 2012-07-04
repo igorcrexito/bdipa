@@ -10,6 +10,7 @@ import Banco.Conexao.UsuarioDAO;
 import DAO.Paciente;
 import DAO.Usuario;
 import classes.OperacoesArquivos;
+import classes.Propriedades;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -224,9 +225,12 @@ public class PacienteBean {
             //Cria um arquivo UploadFile, para receber o arquivo do evento
 
             UploadedFile arq = event.getFile();
+            
+            URL urlArquivo = getClass().getClassLoader().getResource("resources");
+            String url = urlArquivo.getPath().replaceAll("%20", " ");
 
             InputStream in = new BufferedInputStream(arq.getInputstream());
-            File file = new File("C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/build/web/WEB-INF/classes/imagensPaciente/" + arq.getFileName());
+            File file = new File(url + arq.getFileName());
 
             urlImagem = "reduzida"+arq.getFileName();
             //urlImagem = "C:/imagens/" + arq.getFileName();
@@ -240,20 +244,10 @@ public class PacienteBean {
             }
             //cadastrar();
             fout.close();
-
-            file = new File("C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/web/imagensPaciente/" + arq.getFileName());
-            fout = new FileOutputStream(file);
-
-            while (in.available() != 0) {
-
-                fout.write(in.read());
-
-            }
-            //cadastrar();
-            fout.close();
-
-            scale("C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/web/imagensPaciente/"+arq.getFileName(), 600, 600, "C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/web/imagensPaciente/reduzida" + arq.getFileName());
-            scale("C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/web/imagensPaciente/"+arq.getFileName(), 600, 600, "C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/build/web/imagensPaciente/reduzida" + arq.getFileName());
+            
+            String caminho = Propriedades.retornaCaminho();
+            
+            scale(url+arq.getFileName(), 600, 600, caminho + arq.getFileName());
 
             FacesMessage msg = new FacesMessage("O Arquivo ", file.getName() + " salvo.");
 
@@ -307,11 +301,11 @@ public class PacienteBean {
                 break;
             }
         }
-        URL urlArquivo = getClass().getClassLoader().getResource("imagensPaciente");
+        URL urlArquivo = getClass().getClassLoader().getResource("resources");
         String url = urlArquivo.getPath().replaceAll("%20", " ");
         //url = "/C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/build/web/WEB-INF/classes/imagensPaciente/";
         System.out.println(url);
-        OperacoesArquivos.downloadFile(this.urlImagem, "C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/build/web/WEB-INF/classes/imagensPaciente/", "jpg", FacesContext.getCurrentInstance()); //colocar path do servidor
+        OperacoesArquivos.downloadFile(this.urlImagem, url, "jpg", FacesContext.getCurrentInstance()); //colocar path do servidor
         return "gotoDownload";
     }
 

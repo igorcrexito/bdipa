@@ -5,6 +5,7 @@
 package DAO;
 
 import beans.FileDownloadController;
+import java.net.URL;
 import org.primefaces.model.StreamedContent;
 
 /**
@@ -21,6 +22,7 @@ public class Paciente {
     private String racareal;
     private String sexoreal;
     private FileDownloadController imagem;
+    private String urlReduzida;
 
     public Paciente(int id, int sexo, int idade, String urlImagem, int raca) {
         this.id = id;
@@ -77,19 +79,20 @@ public class Paciente {
         return imagem.getFile();
    }
 
+    public String getUrlReduzida() {
+        URL urlArquivo = getClass().getClassLoader().getResource("resources");
+        String url = urlArquivo.getPath().replaceAll("%20", " ");
+        
+        urlReduzida = url+urlImagem;
+        return urlReduzida;
+    }
+
+    public void setUrlReduzida(String urlReduzida) {
+        this.urlReduzida = urlReduzida;
+    }
+
+   
     public String getRacareal() {
-//        switch (raca) {
-//            case 0:
-//                racareal = "Amarela";
-//            case 1:
-//                racareal = "Branca";
-//            case 2:
-//                racareal = "Parda";
-//            case 3:
-//                racareal = "Negra";
-//             default:
-//                racareal = "Não informado";
-//        }
         if (raca == 0) {
             racareal = "Amarela";
         } else {
