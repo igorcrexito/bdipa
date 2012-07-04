@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -290,12 +291,15 @@ public class PacienteBean {
         for (int i=0;i<pacientes.size();i++) {
             if (this.opcaoImagem==pacientes.get(i).getId()) {
                 this.urlImagem = pacientes.get(i).getUrlImagem();
-                this.urlImagem = urlImagem.substring(8);
+                //this.urlImagem = urlImagem.substring(8);
                 break;
             }
         }
-
-        OperacoesArquivos.downloadFile(this.urlImagem, "C:/Documents and Settings/Igor-Note/Meus documentos/NetBeansProjects/bancoImagens2/bancoImagens/web/imagensPaciente/", "jpg", FacesContext.getCurrentInstance()); //colocar path do servidor
+        URL urlArquivo = getClass().getClassLoader().getResource("imagensPaciente");
+        String url = urlArquivo.getPath().replaceAll("%20", " ");
+        //url = "/C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/build/web/WEB-INF/classes/imagensPaciente/";
+        System.out.println(url);
+        OperacoesArquivos.downloadFile(this.urlImagem, url, "jpg", FacesContext.getCurrentInstance()); //colocar path do servidor
         return "gotoDownload";
     }
 
