@@ -40,7 +40,7 @@
 
                     <p:carousel value="#{pacBean.pacientes}" itemStyle="height:760px;width:610px;" rows="1" var="paciente">
                         <h:panelGrid columns="1" cellpadding="5">
-                            <p:graphicImage value="/imagensPaciente/#{paciente.urlImagem}">
+                            <p:graphicImage value="/imagensPaciente/reduzida#{paciente.urlImagem}">
                                 <f:param id="paciente" name="paciente" value="#{paciente.id}" />
                             </p:graphicImage>
                             <h:outputText value="Nº da imagem: #{paciente.id}" />
