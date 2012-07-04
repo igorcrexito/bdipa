@@ -226,7 +226,7 @@ public class PacienteBean {
             UploadedFile arq = event.getFile();
 
             InputStream in = new BufferedInputStream(arq.getInputstream());
-            File file = new File("C:/Documents and Settings/Igor-Note/Meus documentos/NetBeansProjects/trunk/BancoImagens/web/imagensPaciente/" + arq.getFileName());
+            File file = new File("C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/web/imagensPaciente/" + arq.getFileName());
 
             urlImagem = "reduzida"+arq.getFileName();
             //urlImagem = "C:/imagens/" + arq.getFileName();
@@ -240,8 +240,20 @@ public class PacienteBean {
             }
             //cadastrar();
             fout.close();
-            scale("C:/Documents and Settings/Igor-Note/Meus documentos/NetBeansProjects/trunk/BancoImagens/web/imagensPaciente/"+arq.getFileName(), 600, 600, "C:/Documents and Settings/Igor-Note/Meus documentos/NetBeansProjects/trunk/BancoImagens/web/imagensPaciente/reduzida" + arq.getFileName());
-            scale("C:/Documents and Settings/Igor-Note/Meus documentos/NetBeansProjects/trunk/BancoImagens/web/imagensPaciente/"+arq.getFileName(), 600, 600, "C:/Documents and Settings/Igor-Note/Meus documentos/NetBeansProjects/trunk/BancoImagens/build/web/imagensPaciente/reduzida" + arq.getFileName());
+
+            file = new File("C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/build/web/imagensPaciente/" + arq.getFileName());
+            fout = new FileOutputStream(file);
+
+            while (in.available() != 0) {
+
+                fout.write(in.read());
+
+            }
+            //cadastrar();
+            fout.close();
+
+            scale("C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/web/imagensPaciente/"+arq.getFileName(), 600, 600, "C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/web/imagensPaciente/reduzida" + arq.getFileName());
+            scale("C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/web/imagensPaciente/"+arq.getFileName(), 600, 600, "C:/Documents and Settings/Igor-Note/Desktop/trunk/BancoImagens/build/web/imagensPaciente/reduzida" + arq.getFileName());
 
             FacesMessage msg = new FacesMessage("O Arquivo ", file.getName() + " salvo.");
 
@@ -291,7 +303,7 @@ public class PacienteBean {
         for (int i=0;i<pacientes.size();i++) {
             if (this.opcaoImagem==pacientes.get(i).getId()) {
                 this.urlImagem = pacientes.get(i).getUrlImagem();
-                //this.urlImagem = urlImagem.substring(8);
+                this.urlImagem = urlImagem.substring(8);
                 break;
             }
         }
