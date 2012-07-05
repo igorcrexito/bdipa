@@ -80,11 +80,13 @@ public class Paciente {
    }
 
     public String getUrlReduzida() {
-        URL urlArquivo = getClass().getClassLoader().getResource("resources");
-        String url = urlArquivo.getPath().replaceAll("%20", " ");
-        
-        urlReduzida = url+urlImagem;
-        return urlReduzida;
+        String vec[] = new String[2];
+        urlReduzida = urlImagem;
+        if (urlReduzida.contains(".tif")) {
+            vec = urlReduzida.split(".tif");
+            return vec[0]+".jpg";
+        } else 
+            return urlReduzida;
     }
 
     public void setUrlReduzida(String urlReduzida) {

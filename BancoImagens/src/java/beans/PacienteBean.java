@@ -11,6 +11,7 @@ import DAO.Paciente;
 import DAO.Usuario;
 import classes.OperacoesArquivos;
 import classes.Propriedades;
+import classes.TiffUtils;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -53,17 +54,18 @@ public class PacienteBean {
     private int raca;
     private int opcaoImagem;
     private List<SelectItem> colecao;
-    private int filtroidadeinicial=0;
-    private int filtroidadefinal=0;
-    private int filtroraca=4;
-    private int filtrosexo=2;
+    private int filtroidadeinicial = 0;
+    private int filtroidadefinal = 0;
+    private int filtroraca = 4;
+    private int filtrosexo = 2;
     boolean flagidade = false;
     boolean flagsexo = false;
     boolean flagraca = false;
+    boolean isTiff = false;
 
     public List<SelectItem> getColecao() {
         colecao = new ArrayList<SelectItem>();
-        for (int i=0;i<pacientes.size();i++) {
+        for (int i = 0; i < pacientes.size(); i++) {
             colecao.add(new SelectItem(pacientes.get(i).getId()));
         }
         return colecao;
@@ -119,14 +121,17 @@ public class PacienteBean {
 
         flagidade = false;
         flagraca = false;
-        flagsexo=false;
+        flagsexo = false;
 
-        if (this.filtroidadefinal!=0 && this.filtroidadeinicial<this.filtroidadefinal)
+        if (this.filtroidadefinal != 0 && this.filtroidadeinicial < this.filtroidadefinal) {
             flagidade = true;
-        if (this.filtroraca!=4)
+        }
+        if (this.filtroraca != 4) {
             flagraca = true;
-        if (this.filtrosexo!=2)
+        }
+        if (this.filtrosexo != 2) {
             flagsexo = true;
+        }
 
         ArrayList<Paciente> pacfiltrados = new ArrayList<Paciente>();
         try {
@@ -134,50 +139,57 @@ public class PacienteBean {
         } catch (SQLException ex) {
             Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for (int i=0;i<pacientes.size();i++) {
-            if (flagidade ==true && flagraca == false && flagsexo==false) {
-                if ((pacientes.get(i).getIdade()>=this.filtroidadeinicial && pacientes.get(i).getIdade()<=this.filtroidadefinal)) {
+        for (int i = 0; i < pacientes.size(); i++) {
+            if (flagidade == true && flagraca == false && flagsexo == false) {
+                if ((pacientes.get(i).getIdade() >= this.filtroidadeinicial && pacientes.get(i).getIdade() <= this.filtroidadefinal)) {
                     pacfiltrados.add(pacientes.get(i));
                 }
             }
 
-            if (flagidade ==false && flagraca == true && flagsexo==false)
-                if (pacientes.get(i).getRaca()==this.filtroraca) {
+            if (flagidade == false && flagraca == true && flagsexo == false) {
+                if (pacientes.get(i).getRaca() == this.filtroraca) {
                     pacfiltrados.add(pacientes.get(i));
                 }
+            }
 
-            if (flagidade ==false && flagraca == false && flagsexo==true)
-                if (pacientes.get(i).getSexo()==this.filtrosexo) {
+            if (flagidade == false && flagraca == false && flagsexo == true) {
+                if (pacientes.get(i).getSexo() == this.filtrosexo) {
                     pacfiltrados.add(pacientes.get(i));
                 }
+            }
 
-            if (flagidade ==true && flagraca == true && flagsexo==false) {
-                if ((pacientes.get(i).getIdade()>=this.filtroidadeinicial && pacientes.get(i).getIdade()<=this.filtroidadefinal)) {
-                    if (pacientes.get(i).getRaca()==this.filtroraca)
+            if (flagidade == true && flagraca == true && flagsexo == false) {
+                if ((pacientes.get(i).getIdade() >= this.filtroidadeinicial && pacientes.get(i).getIdade() <= this.filtroidadefinal)) {
+                    if (pacientes.get(i).getRaca() == this.filtroraca) {
                         pacfiltrados.add(pacientes.get(i));
+                    }
                 }
             }
 
-            if (flagidade ==true && flagraca == false &&flagsexo==true) {
-                if ((pacientes.get(i).getIdade()>=this.filtroidadeinicial && pacientes.get(i).getIdade()<=this.filtroidadefinal)) {
-                    if (pacientes.get(i).getSexo()==this.filtrosexo)
+            if (flagidade == true && flagraca == false && flagsexo == true) {
+                if ((pacientes.get(i).getIdade() >= this.filtroidadeinicial && pacientes.get(i).getIdade() <= this.filtroidadefinal)) {
+                    if (pacientes.get(i).getSexo() == this.filtrosexo) {
                         pacfiltrados.add(pacientes.get(i));
+                    }
                 }
             }
 
-            if (flagidade ==false && flagraca == true && flagsexo==true) {
-                if (pacientes.get(i).getRaca()==this.filtroraca) {
-                    if (pacientes.get(i).getSexo()==this.filtrosexo)
+            if (flagidade == false && flagraca == true && flagsexo == true) {
+                if (pacientes.get(i).getRaca() == this.filtroraca) {
+                    if (pacientes.get(i).getSexo() == this.filtrosexo) {
                         pacfiltrados.add(pacientes.get(i));
+                    }
                 }
             }
 
 
-            if (flagidade ==true && flagraca == true && flagsexo==true) {
-                if ((pacientes.get(i).getIdade()>=this.filtroidadeinicial && pacientes.get(i).getIdade()<=this.filtroidadefinal)) {
-                    if (pacientes.get(i).getRaca()==this.filtroraca)
-                        if (pacientes.get(i).getSexo()==this.filtrosexo)
+            if (flagidade == true && flagraca == true && flagsexo == true) {
+                if ((pacientes.get(i).getIdade() >= this.filtroidadeinicial && pacientes.get(i).getIdade() <= this.filtroidadefinal)) {
+                    if (pacientes.get(i).getRaca() == this.filtroraca) {
+                        if (pacientes.get(i).getSexo() == this.filtrosexo) {
                             pacfiltrados.add(pacientes.get(i));
+                        }
+                    }
                 }
             }
 
@@ -196,8 +208,8 @@ public class PacienteBean {
         flagidade = false;
         flagsexo = false;
         flagraca = false;
-        this.filtroidadefinal=0;
-        this.filtroidadefinal =0;
+        this.filtroidadefinal = 0;
+        this.filtroidadefinal = 0;
         this.filtroraca = 4;
         this.filtrosexo = 2;
         return "galeria.xhtml";
@@ -221,19 +233,18 @@ public class PacienteBean {
     }
 
     public void processFileUpload(FileUploadEvent event) throws IOException {
+
         try {
             //Cria um arquivo UploadFile, para receber o arquivo do evento
-
             UploadedFile arq = event.getFile();
-            
+
             URL urlArquivo = getClass().getClassLoader().getResource("resources");
             String url = urlArquivo.getPath().replaceAll("%20", " ");
 
             InputStream in = new BufferedInputStream(arq.getInputstream());
             File file = new File(url + arq.getFileName());
 
-            urlImagem = "reduzida"+arq.getFileName();
-            //urlImagem = "C:/imagens/" + arq.getFileName();
+            urlImagem = "reduzida" + arq.getFileName();
 
             FileOutputStream fout = new FileOutputStream(file);
 
@@ -244,10 +255,10 @@ public class PacienteBean {
             }
             //cadastrar();
             fout.close();
-            
+
             String caminho = Propriedades.retornaCaminho();
-            
-            scale(url+arq.getFileName(), 600, 600, caminho + arq.getFileName());
+
+            scale(url + arq.getFileName(), 600, 600, caminho + arq.getFileName());
 
             FacesMessage msg = new FacesMessage("O Arquivo ", file.getName() + " salvo.");
 
@@ -276,26 +287,48 @@ public class PacienteBean {
         this.pacDao = pacDao;
     }
 
-    public static void scale(String srcFile, int destWidth, int destHeight,
-            String destFile) throws IOException {
+    public void scale(String srcFile, int destWidth, int destHeight,
+       String destFile) throws IOException {
 
-        BufferedImage src = ImageIO.read(new File(srcFile));
-        BufferedImage dest = new BufferedImage(destWidth, destHeight,
-                BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = dest.createGraphics();
+        String caminho = Propriedades.retornaCaminho();
+        if (srcFile.contains(".tif")) {
+            isTiff = true;
+            String vec[] = urlImagem.split(".tif");
+            String vec2[] = vec[0].split("reduzida");
 
-        AffineTransform at = AffineTransform.getScaleInstance(
-                (double) destWidth / src.getWidth(),
-                (double) destHeight / src.getHeight());
-        g.drawRenderedImage(src, at);
-        ImageIO.write(dest, "JPG", new File(destFile));
+            TiffUtils.TiffToJpg(srcFile, caminho + vec2[1] + ".jpg");
+
+            BufferedImage src = ImageIO.read(new File(caminho + vec2[1] + ".jpg"));
+            BufferedImage dest = new BufferedImage(destWidth, destHeight,
+                    BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = dest.createGraphics();
+
+            AffineTransform at = AffineTransform.getScaleInstance(
+                    (double) destWidth / src.getWidth(),
+                    (double) destHeight / src.getHeight());
+            g.drawRenderedImage(src, at);
+            ImageIO.write(dest, "JPG", new File(caminho + vec2[1] + ".jpg"));
+
+        } else {
+            isTiff = false;
+            BufferedImage src = ImageIO.read(new File(srcFile));
+            BufferedImage dest = new BufferedImage(destWidth, destHeight,
+                    BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = dest.createGraphics();
+
+            AffineTransform at = AffineTransform.getScaleInstance(
+                    (double) destWidth / src.getWidth(),
+                    (double) destHeight / src.getHeight());
+            g.drawRenderedImage(src, at);
+            ImageIO.write(dest, "JPG", new File(destFile));
+        }
 
     }
 
     public String downloadFile() {
 
-        for (int i=0;i<pacientes.size();i++) {
-            if (this.opcaoImagem==pacientes.get(i).getId()) {
+        for (int i = 0; i < pacientes.size(); i++) {
+            if (this.opcaoImagem == pacientes.get(i).getId()) {
                 this.urlImagem = pacientes.get(i).getUrlImagem();
                 this.urlImagem = urlImagem.substring(8);
                 break;

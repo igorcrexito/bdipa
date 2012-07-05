@@ -67,6 +67,10 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+                    <file>${file.reference.jai_core_assinado.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
                     <file>${file.reference.Applet_Assinada.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
