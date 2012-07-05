@@ -34,7 +34,7 @@
         </init-param>
         <init-param>
             <param-name>thresholdSize</param-name>
-            <param-value>1000000</param-value>
+            <param-value>999999999</param-value>
         </init-param>
     </filter>
     <filter-mapping>

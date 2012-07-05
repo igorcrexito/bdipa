@@ -59,8 +59,8 @@
                 <p:fileUpload fileUploadListener="#{pacBean.processFileUpload}"
                               mode="advanced"
                               update="messages"
-                              sizeLimit="10000000"
-                              allowTypes="/(\.|\/)(bmp|gif|jpe?g|png|tif?f)$/"/>
+                              sizeLimit="999999999"
+                              allowTypes="/(\.|\/)(tif|bmp|gif|jpe?g|png)$/"/>
                 <p:growl id="messages" showDetail="true"/>
 
             </h:form>

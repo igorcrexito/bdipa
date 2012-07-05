@@ -696,6 +696,7 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.primefaces-3.2-SNAPSHOT-sources.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.primefaces-3.0.1.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${libs.Comet-GlassFish-v3.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jai_core_assinado.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.Applet_Assinada.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.jai_codec_assinado.jar}" todir="${build.web.dir}//"/>
         <copyfiles files="${file.reference.AppletAssinado.jar}" todir="${build.web.dir}//"/>
@@ -720,6 +721,7 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.primefaces-3.2-SNAPSHOT-sources.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.primefaces-3.0.1.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${libs.Comet-GlassFish-v3.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.jai_core_assinado.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.Applet_Assinada.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.jai_codec_assinado.jar}" todir="${build.web.dir}//"/>
         <copyfiles files="${file.reference.AppletAssinado.jar}" todir="${build.web.dir}//"/>
