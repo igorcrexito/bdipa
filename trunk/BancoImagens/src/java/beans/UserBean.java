@@ -5,7 +5,6 @@
 package beans;
 
 import Banco.Conexao.ConexaoBD;
-import Banco.Conexao.PacienteDAO;
 import Banco.Conexao.UsuarioDAO;
 import DAO.Usuario;
 import EmailUtils.EmailUtils;
@@ -42,7 +41,7 @@ public class UserBean {
     private String justificativa = "";
     private boolean naologado = true;
     private boolean logado = false;
-    UsuarioDAO userDao = new UsuarioDAO(ConexaoBD.getConexaoBD());
+    UsuarioDAO userDao = new UsuarioDAO(ConexaoBD.getConexaoBD());;
     private Mensagem mensagem = new Mensagem();
 
 
@@ -157,6 +156,7 @@ public class UserBean {
          }
 
         try {
+            ConexaoBD.getConexaoBD().conecta();
             userDao.inserirUsuario(rg, nome, instituicao, email, nivelAcesso, senha, login, justificativa);
 
             informacao = "Usuário " + nome + " cadastrado com sucesso";
@@ -166,7 +166,7 @@ public class UserBean {
             this.nome = "";
             this.rg = "";
             this.fins = "";
-
+            ConexaoBD.getConexaoBD().desconecta();
 
         } catch (Exception ex) {
             informacao = "Usuário não pode ser cadastrado";
@@ -197,11 +197,13 @@ public class UserBean {
 
         //UsuarioDAO userDAO = new UsuarioDAO();
         try {
+            ConexaoBD.getConexaoBD().conecta();
             user = userDao.getUsuarioRG(this.rg);
             this.nome = user.getNome();
             this.rg = user.getRg();
             this.instituicao = user.getInstituicao();
             informacao = "RG do sacana é: " + this.rg;
+            ConexaoBD.getConexaoBD().desconecta();
         } catch (SQLException ex) {
             informacao = "Senha e/ou login errado(s)";
             Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -213,8 +215,10 @@ public class UserBean {
 
 
         try {
+            ConexaoBD.getConexaoBD().conecta();
             Usuario user = userDao.getUsuariosFromLoginSenha(login, senha);
             informacao="";
+            ConexaoBD.getConexaoBD().desconecta();
 
             if (user!=null) {
                 /*resgatando dados do BD para o Bean*/
@@ -244,8 +248,10 @@ public class UserBean {
 
     public void excluir() {
         try {
+            ConexaoBD.getConexaoBD().conecta();
             userDao.excluirUsuario(rg);
             informacao = "Usuario deletado";
+            ConexaoBD.getConexaoBD().desconecta();
         } catch (SQLException ex) {
             informacao = "Senha ou login inválido";
         }

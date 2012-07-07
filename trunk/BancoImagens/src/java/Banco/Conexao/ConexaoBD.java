@@ -32,15 +32,10 @@ public class ConexaoBD {
 
     private ConexaoBD() {//construtor privado, pois ninguem poderá dar um new na classe
 
-        //this.DRIVER_JBDC = "com.mysql.jdbc.Driver";
-        //this.URL = "jdbc:mysql://localhost/pa_uefs";
-        //this.usuario = "root";
-        //this.senha = "papapop12";
         Propriedades prop = new Propriedades();
-        //prop.criarPropriedades(this);
         prop.carregarPropriedades(this);
         System.out.println(this.DRIVER_JBDC + " driver");
-        conecta();
+        //conecta();
 
     }
 

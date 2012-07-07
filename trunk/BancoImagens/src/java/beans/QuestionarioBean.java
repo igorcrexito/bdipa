@@ -24,7 +24,7 @@ public class QuestionarioBean {
     private String sugestoesCriticas;
     private String formacaoAcademica;
     private String nomeCompleto;
-    QuestionarioDAO questDAO = new QuestionarioDAO(ConexaoBD.getConexaoBD());
+    QuestionarioDAO questDAO = new QuestionarioDAO(ConexaoBD.getConexaoBD());;
     /** Creates a new instance of QuestionarioBean */
     public QuestionarioBean(){
 
@@ -79,7 +79,7 @@ public class QuestionarioBean {
     }
 
     public String cadastrarQuestionario() {
-        
+        ConexaoBD.getConexaoBD().conecta();
         questDAO.inserirQuestionario(experienciaTracados, experienciaSoftware, avaliacaoApplet, nomeCompleto, sugestoesCriticas, formacaoAcademica);
 
         this.experienciaSoftware = 0;
@@ -89,6 +89,7 @@ public class QuestionarioBean {
         this.nomeCompleto = "";
         this.sugestoesCriticas = "";
         
+        ConexaoBD.getConexaoBD().desconecta();
         return "home.xhtml";
     }
 

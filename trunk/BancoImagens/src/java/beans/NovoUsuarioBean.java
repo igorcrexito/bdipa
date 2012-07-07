@@ -26,15 +26,12 @@ import javax.faces.bean.SessionScoped;
 public class NovoUsuarioBean {
 
     private List<Usuario> usuarios;
-    private UsuarioDAO userDao = new UsuarioDAO(ConexaoBD.getConexaoBD());
+    private UsuarioDAO userDao;
 
     public NovoUsuarioBean () {
         usuarios = new ArrayList<Usuario>();
-        try {
-            usuarios = userDao.getUsuarios();
-        } catch (SQLException ex) {
-            Logger.getLogger(NovoUsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+          
+        
     }
 
     public void altera() {
@@ -42,6 +39,14 @@ public class NovoUsuarioBean {
     }
 
     public List<Usuario> getUsuarios() {
+          ConexaoBD.getConexaoBD().conecta();
+            userDao = new UsuarioDAO(ConexaoBD.getConexaoBD());
+        try {
+            usuarios = userDao.getUsuarios();
+        } catch (SQLException ex) {
+            Logger.getLogger(NovoUsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ConexaoBD.getConexaoBD().desconecta();
         return usuarios;
     }
 
