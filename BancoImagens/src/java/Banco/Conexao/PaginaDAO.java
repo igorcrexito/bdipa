@@ -10,7 +10,7 @@ public class PaginaDAO {
   private ConexaoBD conexao;
 
   public PaginaDAO() {
-       conexao = ConexaoBD.getConexaoBD();
+       this.conexao = ConexaoBD.getConexaoBD();
   }
 
    public Pagina getPaginaFromNome (String nome) throws SQLException {

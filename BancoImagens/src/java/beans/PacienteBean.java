@@ -47,7 +47,7 @@ public class PacienteBean {
 
     boolean filtroflag = false;
     private List<Paciente> pacientes;
-    PacienteDAO pacDao = new PacienteDAO(ConexaoBD.getConexaoBD());
+    PacienteDAO pacDao = new PacienteDAO(ConexaoBD.getConexaoBD());;
     private int idade;
     private String urlImagem;
     private int sexo;
@@ -110,7 +110,9 @@ public class PacienteBean {
     public void popularPacientes() {
         if (!filtroflag) {
             try {
+                ConexaoBD.getConexaoBD().conecta();
                 this.pacientes = pacDao.getTodosPacientesLista();
+                ConexaoBD.getConexaoBD().desconecta();
             } catch (SQLException ex) {
                 Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -135,6 +137,7 @@ public class PacienteBean {
 
         ArrayList<Paciente> pacfiltrados = new ArrayList<Paciente>();
         try {
+            ConexaoBD.getConexaoBD().conecta();
             this.pacientes = pacDao.getTodosPacientesLista();
         } catch (SQLException ex) {
             Logger.getLogger(PacienteBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,6 +202,7 @@ public class PacienteBean {
 
         pacientes = pacfiltrados;
         filtroflag = true;
+        ConexaoBD.getConexaoBD().desconecta();
         return "galeria.xhtml";
     }
 
@@ -226,7 +230,9 @@ public class PacienteBean {
     public void cadastrar() {
 
         try {
+            ConexaoBD.getConexaoBD().conecta();
             pacDao.inserirPaciente(this.idade, this.sexo, this.raca, urlImagem);
+            ConexaoBD.getConexaoBD().desconecta();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

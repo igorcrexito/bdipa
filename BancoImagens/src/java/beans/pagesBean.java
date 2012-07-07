@@ -27,7 +27,7 @@ public class pagesBean {
     private ArrayList<String> conteudos = new ArrayList<String>();
     private int referencia;
     private String campoAtual;
-    PaginaDAO pagDAO = new PaginaDAO();
+    PaginaDAO pagDAO  = new PaginaDAO();
     private String nome;
     public String campo1,campo2,campo3,campo4;
 
@@ -38,6 +38,7 @@ public class pagesBean {
     public void carregaTexto() {
         Pagina pag = null;
         try {
+            ConexaoBD.getConexaoBD().conecta();
             pag = pagDAO.getPaginaFromNome(nome);
         } catch (SQLException ex) {
             Logger.getLogger(pagesBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,44 +47,54 @@ public class pagesBean {
             this.conteudos = pag.getConteudo();
         }
         campoAtual = conteudos.get(referencia);
+        ConexaoBD.getConexaoBD().desconecta();
     }
 
     public void salvaTexto() {
+        ConexaoBD.getConexaoBD().conecta();
         this.conteudos.set(referencia, campoAtual);
         pagDAO.updateConteudo(nome, conteudos);
+        ConexaoBD.getConexaoBD().desconecta();
     }
    
     public void acionaHome() {
         nome = "home";
         Pagina pag=null;
         try {
+            ConexaoBD.getConexaoBD().conecta();
             pag = pagDAO.getPaginaFromNome(nome);
+            
         } catch (SQLException ex) {
             Logger.getLogger(pagesBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-
          nome = pag.getNome();
          this.conteudos = pag.getConteudo();
+         ConexaoBD.getConexaoBD().desconecta();
     }
 
      public void acionaPrincipaisAnalises() {
         nome = "principaisanalises";
         Pagina pag=null;
         try {
+            ConexaoBD.getConexaoBD().conecta();
             pag = pagDAO.getPaginaFromNome(nome);
+            
         } catch (SQLException ex) {
             Logger.getLogger(pagesBean.class.getName()).log(Level.SEVERE, null, ex);
         }
 
          nome = pag.getNome();
          this.conteudos = pag.getConteudo();
+         ConexaoBD.getConexaoBD().desconecta();
     }
 
      public void acionaPrincipaisTeoricos() {
         nome = "principaisteoricos";
         Pagina pag=null;
         try {
+            ConexaoBD.getConexaoBD().conecta();
             pag = pagDAO.getPaginaFromNome(nome);
+            ConexaoBD.getConexaoBD().desconecta();
         } catch (SQLException ex) {
             Logger.getLogger(pagesBean.class.getName()).log(Level.SEVERE, null, ex);
         }
